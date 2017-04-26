@@ -15,6 +15,10 @@ public class Start{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(true);
+
+        //frame.setExtendedState(JFrame.MAXIMIZED_BOTH); //this will make game fullscreen
+        //frame.setUndecorated(true);
+
         frame.setVisible(true);
         frame.add(renderer);
         level = new LevelOne();
