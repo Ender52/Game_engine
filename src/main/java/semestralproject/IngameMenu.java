@@ -30,6 +30,9 @@ public class IngameMenu extends Rectangle implements KeyListener{
             position --;
             position = Math.abs((position )% buttons.size());
         }
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE){
+            System.exit(0);
+        }
     }
 
     @Override

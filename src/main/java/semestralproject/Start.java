@@ -3,7 +3,6 @@ package semestralproject;
 import javax.swing.JFrame;
 
 public class Start{
-    public static int a = 0; //?????????
     public static Level level;
     public static int WIDTH = 500, HEIGHT = 500;
     public static JFrame frame;
