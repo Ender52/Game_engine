@@ -1,5 +1,6 @@
-package semestralproject;
+package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus;
 
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.*;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -42,7 +43,7 @@ public class IngameMenu extends Rectangle implements KeyListener{
     public IngameMenu(int x, int y, int width, int height){
         super(x, y, width, height);
         buttons = new ArrayList<>();
-        Start.frame.addKeyListener(this);
+        Game.frame.addKeyListener(this);
     }
 
     public void repaint(Graphics g) {

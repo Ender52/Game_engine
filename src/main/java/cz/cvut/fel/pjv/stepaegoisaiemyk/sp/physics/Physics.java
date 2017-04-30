@@ -1,12 +1,15 @@
-package semestralproject;
+package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.physics;
+
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.*;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.*;
 
 import java.awt.Rectangle;
 
 public class Physics {
     
     public void run(){
-        Start.level.levelLogic();
-        for(Creature c : Start.level.creatures){
+        Game.level.levelLogic();
+        for(Creature c : Game.level.creatures){
             int x = 0, y = 0;
             if(c.active && collision(c)){
                 if(collision(c.sencorT)){
@@ -25,13 +28,10 @@ public class Physics {
             move(c, c.speedX, c.speedY, c.speed);
             react(c, x, y);
         }
-
-        Start.renderer.repaint(); 
-        Start.level.time++;
     }
     
     private boolean collision(Rectangle o){
-        for(Obstacle r: Start.level.obstacles){
+        for(Obstacle r: Game.level.obstacles){
             if(r.intersects(o)){
                 return true;
             }

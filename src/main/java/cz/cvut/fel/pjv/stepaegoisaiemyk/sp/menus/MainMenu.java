@@ -1,14 +1,15 @@
-package semestralproject;
+package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus;
 
 
 import java.awt.Color;
 import java.awt.Font;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.*;
 
 public class MainMenu extends IngameMenu{
     IngameButton buttonLevel1;
     public MainMenu(int x, int y, int width, int height) {
         super(x, y, width, height);
-        Start.frame.addKeyListener(this);
+        Game.frame.addKeyListener(this);
         color = Color.getHSBColor(0f, 0f, 0.7f);
         Font font = new Font("Arial", 1, 35);
         buttonLevel1 = new IngameButton();

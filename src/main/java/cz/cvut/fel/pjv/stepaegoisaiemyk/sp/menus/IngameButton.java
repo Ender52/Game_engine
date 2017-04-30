@@ -1,4 +1,5 @@
-package semestralproject;
+package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus;
+
 
 import java.awt.Color;
 import java.awt.Font;

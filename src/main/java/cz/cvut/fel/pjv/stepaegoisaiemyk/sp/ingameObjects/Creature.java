@@ -1,4 +1,4 @@
-package semestralproject;
+package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects;
 
 
 import java.awt.Color;
@@ -6,10 +6,10 @@ import java.awt.Rectangle;
 
 public class Creature extends Rectangle{
     Rectangle body;
-    int speed, speedX, speedY;
-    Rectangle sencorT, sencorB, sencorR, sencorL;
-    Color color = Color.white;
-    boolean active = false;
+    public int speed, speedX, speedY;
+    public Rectangle sencorT, sencorB, sencorR, sencorL;
+    public Color color = Color.white;
+    public boolean active = false;
 
     public Creature(int x, int y, int width, int height, int speed, boolean active) {
         this.x = x;
