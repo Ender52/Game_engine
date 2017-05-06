@@ -19,11 +19,14 @@ public class LevelOne extends Level{
         obstacles.add(new Obstacle(300, 0, 15, 200));
         obstacles.add(new Obstacle(0, 185, 200, 15));
         
+        /*for(int i = 0; i < 100; i++){
+            obstacles.add(new Obstacle(0, 185, 200, 15));
+        }*/
     }
     
     @Override
     public void levelLogic(){
-        Obstacle wall = obstacles.get(obstacles.size() - 2);
+        Obstacle wall = obstacles.get(5);
         if(time % 4 == 0){
             if(wall.x + wall.width > WIDTH || wall.x <200){
                 loop *= -1;
