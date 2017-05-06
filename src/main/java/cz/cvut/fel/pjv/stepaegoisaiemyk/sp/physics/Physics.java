@@ -8,6 +8,9 @@ import java.awt.Rectangle;
 public class Physics {
     
     public void run(){
+        if(Game.level.pause){
+            return;
+        }
         Game.level.levelLogic();
         for(Creature c : Game.level.creatures){
             int x = 0, y = 0;

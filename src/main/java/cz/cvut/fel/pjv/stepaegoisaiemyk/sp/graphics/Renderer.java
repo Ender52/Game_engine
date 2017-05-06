@@ -28,8 +28,26 @@ public class Renderer extends JPanel{
         }
         if(Game.level.menus.size() > 0){
             for(IngameMenu m : Game.level.menus){
-                m.repaint(g);
+                menuRender(m, g);
             }
+        }
+    }
+    
+    public void menuRender(IngameMenu m, Graphics g) {
+        g.setColor(m.color);
+        g.fillRect(m.x, m.y, m.width, m.height);
+        for(IngameButton b : m.buttons){
+            g.setColor(b.color);
+            if(b.positionInList == m.position){
+                g.setColor(b.activeColor);
+            }
+            g.fillRect(b.x, b.y, b.width, b.height);
+            g.setColor(b.fontColor);
+            if(b.positionInList == m.position){
+                g.setColor(b.fontColorActive);
+            }
+            g.setFont(b.font);
+            g.drawString(b.name, b.fontX, b.fontY);
         }
     }
 }

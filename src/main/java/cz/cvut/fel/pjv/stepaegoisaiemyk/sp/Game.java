@@ -69,6 +69,12 @@ public class Game implements KeyListener, ActionListener{
         if(e.getKeyCode() == KeyEvent.VK_D){  //right
             level.dPressed();
         }
+        if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+            level.escPressed();
+        }
+        if(e.getKeyCode() == KeyEvent.VK_ENTER){
+            level.enterPressed();
+        }
     }
 
     @Override

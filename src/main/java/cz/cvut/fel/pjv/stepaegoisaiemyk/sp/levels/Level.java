@@ -21,7 +21,7 @@ public class Level{
     int loop = 1;
     public int time = 0;
     //public Timer timer;
-    boolean pause = true;
+    public boolean pause = true;
     IngameMenu menu;
     
     public Level() {  //constructor
@@ -36,59 +36,73 @@ public class Level{
     }
     
     public void wPressed(){
-        player.speedY = -player.speed;
+        if(!pause){
+            player.speedY = -player.speed;
+        }else{
+            menu.wPressed();
+        }
     }
     
     public void sPressed(){
-        player.speedY = player.speed;
+        if(!pause){
+            player.speedY = player.speed;
+        }else{
+            menu.sPressed();
+        }
     }
     
     public void aPressed(){
-        player.speedX = -player.speed;
+        if(!pause)
+            player.speedX = -player.speed;
     }
     
     public void dPressed(){
-        player.speedX = player.speed;
+        if(!pause)
+            player.speedX = player.speed;
+    }
+    
+    public void escPressed(){
+        pause = !pause;
+        pause();
+    }
+    
+    public void enterPressed(){
+        if(pause){
+            menu.select();
+        }
     }
 
     
     public void wReleased(){
-        player.speedY = 0;
+        if(!pause)
+            player.speedY = 0;
     }
     
     public void sReleased(){
-        player.speedY= 0;
+        if(!pause)
+            player.speedY= 0;
     }
     
     public void aReleased(){
-        player.speedX = 0;
+        if(!pause)
+            player.speedX = 0;
     }
     
     public void dReleased(){
-        player.speedX = 0;
-    }
-
-    public void repaint(Graphics g){  //refreshes the frame
-        g.setColor(color);
-        g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
-        for(Creature c : Game.level.creatures){
-            g.setColor(c.color);
-            g.fillRect(c.x, c.y, c.width, c.height);
-        }
-        for(Obstacle r : obstacles){
-            g.setColor(r.color);
-            g.fillRect(r.x, r.y, r.width, r.height);
-        }
-        if(menus.size() > 0){
-            for(IngameMenu m : menus){
-                m.repaint(g);
-            }
-        }
-        
+        if(!pause)
+            player.speedX = 0;
     }
     
     public void levelLogic(){
-        //pauseMenu();
     }
-
+    
+    public void pause(){
+        if(pause){
+            menu = new MainMenu(50, 50, WIDTH - 100, HEIGHT - 100);
+            menus.add(menu);
+        }else{
+            menus.remove(menu);
+            menu = null;
+        }
+    }
 }
