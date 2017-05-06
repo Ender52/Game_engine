@@ -6,14 +6,13 @@ import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.*;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.util.ArrayList;
 
 
 public class Level{
-    final int HEIGHT = 500, WIDTH = 500;  //variables changing size of the frame; used everyewhere
+    final int HEIGHT = Game.HEIGHT, WIDTH = Game.WIDTH;  //variables changing size of the frame; used everyewhere
     public Color color;
-    Creature player;
+    public Creature player;
     Physics physics;
     public ArrayList<Obstacle> obstacles;
     public ArrayList<Creature> creatures;
@@ -94,11 +93,12 @@ public class Level{
     }
     
     public void levelLogic(){
+        pause();
     }
     
     public void pause(){
         if(pause){
-            menu = new MainMenu(50, 50, WIDTH - 100, HEIGHT - 100);
+            menu = new MainMenu(300, 100, WIDTH - 600, HEIGHT - 200);
             menus.add(menu);
         }else{
             menus.remove(menu);

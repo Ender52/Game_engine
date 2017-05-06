@@ -8,6 +8,8 @@ import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.*;
      
 
 public class Renderer extends JPanel{
+    int windowX, windowY;
+    
     @Override
     protected void paintComponent(Graphics g)
     {
@@ -16,15 +18,17 @@ public class Renderer extends JPanel{
     }
     
     private void render(Graphics g){
+        windowX = -Game.level.player.x + Game.WIDTH/2 - 20;
+        windowY = -Game.level.player.y + Game.HEIGHT/2 - 20;
         g.setColor(Game.level.color);
-        g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
+        g.fillRect(windowX, windowY, Game.WIDTH, Game.HEIGHT);
         for(Creature c : Game.level.creatures){
             g.setColor(c.color);
-            g.fillRect(c.x, c.y, c.width, c.height);
+            g.fillRect(windowX + c.x, windowY + c.y, c.width, c.height);
         }
         for(Obstacle r : Game.level.obstacles){
             g.setColor(r.color);
-            g.fillRect(r.x, r.y, r.width, r.height);
+            g.fillRect(windowX + r.x, windowY + r.y, r.width, r.height);
         }
         if(Game.level.menus.size() > 0){
             for(IngameMenu m : Game.level.menus){

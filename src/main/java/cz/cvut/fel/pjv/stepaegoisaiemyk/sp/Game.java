@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.levels.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.graphics.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.physics.Physics;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -12,7 +14,7 @@ import javax.swing.Timer;
 
 
 public class Game implements KeyListener, ActionListener{
-    public static int WIDTH = 500, HEIGHT = 500;
+    public static int WIDTH = 800, HEIGHT = 600;
     public static 
     JFrame frame;
     public static Level level;
@@ -22,32 +24,31 @@ public class Game implements KeyListener, ActionListener{
     int time;
     public Game() {
         frame = new JFrame();  //the window itself
+        /*window mode*/
         frame.setSize(WIDTH+6, HEIGHT+28);  // size includes the frame
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
-        frame.setResizable(true);
+        frame.setResizable(false);
+        /**/
+        
+        /*fullscreen mode*/
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); //this will make game fullscreen
+        frame.setUndecorated(true);
+        Dimension resolution = Toolkit.getDefaultToolkit().getScreenSize();
+        WIDTH = (int)resolution.getWidth();
+        HEIGHT = (int)resolution.getHeight();
+        /**/
+        
         renderer = new Renderer();
         physics = new Physics();
         frame.addKeyListener(this);
         timer = new Timer(10, this);
-        //frame.setExtendedState(JFrame.MAXIMIZED_BOTH); //this will make game fullscreen
-        //frame.setUndecorated(true);
-
+        
         frame.setVisible(true);
         frame.add(renderer);
         
         level = new LevelOne();
         time = 0;
-        timer.start();
-    }
-    
-    public void pause(){
-        timer.stop();
-        level = new Level();
-        resume();
-    }
-    
-    public void resume(){
         timer.start();
     }
 
