@@ -7,6 +7,7 @@ import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.*;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Rectangle;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
      
@@ -22,29 +23,38 @@ public class Renderer extends JPanel{
     }
     
     private void render(Graphics g){
-        framecount++;
-        windowX = -Game.level.player.x + Game.WIDTH/2 - 20;
-        windowY = -Game.level.player.y + Game.HEIGHT/2 - 20;
+        windowX = -Game.level.player.x + (Game.WIDTH/2 - 20);
+        windowY = -Game.level.player.y + (Game.HEIGHT/2 - 20);
         g.setColor(Game.level.color);
-        g.fillRect(windowX, windowY, Game.WIDTH, Game.HEIGHT);
+        //background
+        g.fillRect((int)(windowX ), (int)(windowY), Game.WIDTH, Game.HEIGHT);
+        
+        //testing
+        g.setColor(Color.red);
+        Rectangle rect = Game.level.player.simpleAttackRanges.get(Game.level.player.direction);
+        g.fillRect(windowX + rect.x, windowY + rect.y, rect.width, rect.height);
+        
+        //middleground
         for(Creature c : Game.level.creatures){
             g.setColor(c.color);
             g.fillRect(windowX + c.x, windowY + c.y, c.width, c.height);
         }
+        
         for(Obstacle r : Game.level.obstacles){
             g.setColor(r.color);
             g.fillRect(windowX + r.x, windowY + r.y, r.width, r.height);
         }
-        if(Game.level.menus.size() > 0){
-            for(IngameMenu m : Game.level.menus){
-                menuRender(m, g);
-            }
+        //UI
+        for(IngameMenu m : Game.level.menus){
+            menuRender(m, g);
         }
+        
         /* Monitoring FPS */
+        framecount++;
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("ss");
         String s = sdf.format(cal.getTime());
-        if(Integer.valueOf(s) > realtime){
+        if(Integer.valueOf(s) != realtime){
             fps = framecount;
             framecount = 0;
             realtime = Integer.valueOf(s);
@@ -52,7 +62,8 @@ public class Renderer extends JPanel{
         g.setFont(new Font("Arial", 1, 10));
         g.setColor(Color.red);
         g.drawString("FPS: " + fps, 5, 15);
-        g.drawString("Number of objects: " + Game.level.obstacles.size(), 5, 30);
+        g.drawString("Number of obstacles: " + Game.level.obstacles.size(), 5, 30);
+        g.drawString("Number of creatures: " + Game.level.creatures.size(), 5, 45);
         /**/
     }
     

@@ -15,16 +15,16 @@ public class Physics {
         for(Creature c : Game.level.creatures){
             int x = 0, y = 0;
             if(c.active && collision(c)){
-                if(collision(c.sencorT)){
+                if(collision(c.sencorT) || collisionCreature(c)){
                     y += 1;
                 }
-                if(collision(c.sencorB)){
+                if(collision(c.sencorB) || collisionCreature(c)){
                     y += -1;
                 }
-                if(collision(c.sencorR)){
+                if(collision(c.sencorR) || collisionCreature(c)){
                     x += -1;
                 }
-                if(collision(c.sencorL)){
+                if(collision(c.sencorL) || collisionCreature(c)){
                     x += 1;
                 }
             }
@@ -33,9 +33,18 @@ public class Physics {
         }
     }
     
-    private boolean collision(Rectangle o){
-        for(Obstacle r: Game.level.obstacles){
+    private boolean collision(Rectangle r){
+        for(Obstacle o: Game.level.obstacles){
             if(r.intersects(o)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private boolean collisionCreature(Rectangle r){
+        for(Creature c: Game.level.creatures){
+            if(r != c && r.intersects(c)){
                 return true;
             }
         }
@@ -49,7 +58,7 @@ public class Physics {
         int i = 0;
         r.x += x;
         r.y += y;
-        while(collision(r) && i != speed){
+        while((collision(r) || collisionCreature(r)) && i != speed){
             r.x -= x/speed;
             r.y -= y/speed;
             i++;
@@ -61,7 +70,7 @@ public class Physics {
         if((x == 0 && y == 0) || !r.active){
             return;
         }
-        while(collision(r)){
+        while(collision(r) || collisionCreature(r)){
             r.x += x;
             r.y += y;
         }

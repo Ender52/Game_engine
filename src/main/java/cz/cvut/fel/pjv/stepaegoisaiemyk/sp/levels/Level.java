@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Level{
     final int HEIGHT = Game.HEIGHT, WIDTH = Game.WIDTH;  //variables changing size of the frame; used everyewhere
     public Color color;
-    public Creature player;
+    public Player player;
     Physics physics;
     public ArrayList<Obstacle> obstacles;
     public ArrayList<Creature> creatures;
@@ -30,13 +30,14 @@ public class Level{
         creatures = new ArrayList<>();  //the creatures in a list for comfortable usage
 
         obstacles = new ArrayList<>();  //the walls in a list for comfortable usage
-                
+        
         menus = new ArrayList<>();
     }
     
     public void wPressed(){
         if(!pause){
             player.speedY = -player.speed;
+            player.direction = 0;
         }else{
             menu.wPressed();
         }
@@ -45,19 +46,24 @@ public class Level{
     public void sPressed(){
         if(!pause){
             player.speedY = player.speed;
+            player.direction = 2;
         }else{
             menu.sPressed();
         }
     }
     
     public void aPressed(){
-        if(!pause)
+        if(!pause){
             player.speedX = -player.speed;
+            player.direction = 3;
+        }
     }
     
     public void dPressed(){
-        if(!pause)
+        if(!pause){
             player.speedX = player.speed;
+            player.direction = 1;
+        }
     }
     
     public void escPressed(){
@@ -68,6 +74,12 @@ public class Level{
     public void enterPressed(){
         if(pause){
             menu.select();
+        }
+    }
+    
+    public void spacePressed(){
+        if(!pause){
+            player.simpleAttack();
         }
     }
 

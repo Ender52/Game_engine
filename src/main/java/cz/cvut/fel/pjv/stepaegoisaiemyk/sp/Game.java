@@ -4,8 +4,6 @@ import javax.swing.JFrame;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.levels.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.graphics.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.physics.Physics;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -31,7 +29,7 @@ public class Game implements KeyListener, ActionListener{
         frame.setResizable(false);
         /**/
         
-        /*fullscreen mode*/
+        /*fullscreen mode*//*
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); //this will make game fullscreen
         frame.setUndecorated(true);
         Dimension resolution = Toolkit.getDefaultToolkit().getScreenSize();
@@ -75,6 +73,9 @@ public class Game implements KeyListener, ActionListener{
         }
         if(e.getKeyCode() == KeyEvent.VK_ENTER){
             level.enterPressed();
+        }
+        if(e.getKeyCode() == KeyEvent.VK_SPACE){
+            level.spacePressed();
         }
     }
 
