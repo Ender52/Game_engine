@@ -17,6 +17,7 @@ public class Level{
     public ArrayList<Obstacle> obstacles;
     public ArrayList<Creature> creatures;
     public ArrayList<IngameMenu> menus;
+    public ArrayList<Item> items;
     int loop = 1;
     public int time = 0;
     //public Timer timer;
@@ -30,6 +31,8 @@ public class Level{
         creatures = new ArrayList<>();  //the creatures in a list for comfortable usage
 
         obstacles = new ArrayList<>();  //the walls in a list for comfortable usage
+
+        items = new ArrayList<>(); //items on the floor
         
         menus = new ArrayList<>();
     }
