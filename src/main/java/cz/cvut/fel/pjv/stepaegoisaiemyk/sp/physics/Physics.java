@@ -31,7 +31,13 @@ public class Physics {
             move(c, c.speedX, c.speedY, c.speed);
             react(c, x, y);
         }
+
+        for(Item i : Game.level.items)
+        {
+            ItemPicked();
+        }
     }
+
     
     private boolean collision(Rectangle r){
         for(Obstacle o: Game.level.obstacles){
@@ -75,5 +81,18 @@ public class Physics {
             r.y += y;
         }
         r.reloc(r.x, r.y);
+    }
+
+    public void ItemPicked()
+    {
+        for (Item i : Game.level.items)
+        {
+            if(i.intersects(Game.level.player) && !i.taken)
+            {
+                i.taken = true;
+                System.out.println("item is being picked");
+                Game.level.player.inventory.add(i);
+            }
+        }
     }
 }

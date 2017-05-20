@@ -44,13 +44,14 @@ public class LevelOne extends Level{
             }
             wall.x += loop*4;
         }
-        Creature c = creatures.get(1);
+
+        /*Creature c = creatures.get(1);
         if(!c.alive){
             return;
         }
         if(c.x > 500 || c.x < 100){
             c.speedX *= -1;
-        }
+        }*/
     }
     
 }

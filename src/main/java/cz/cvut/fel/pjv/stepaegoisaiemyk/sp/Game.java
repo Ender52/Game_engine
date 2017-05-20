@@ -112,6 +112,7 @@ public class Game implements KeyListener, ActionListener {
         renderer.repaint();
         time++;
         level.time++;
+        level.removeDead();
     }
 
 }
