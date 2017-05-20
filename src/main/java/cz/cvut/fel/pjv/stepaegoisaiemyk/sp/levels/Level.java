@@ -16,7 +16,6 @@ public class Level{
     Physics physics;
     public ArrayList<Obstacle> obstacles;
     public ArrayList<Creature> creatures;
-    public ArrayList<Item> items;
     public ArrayList<IngameMenu> menus;
     int loop = 1;
     public int time = 0;
@@ -33,8 +32,6 @@ public class Level{
         obstacles = new ArrayList<>();  //the walls in a list for comfortable usage
         
         menus = new ArrayList<>();
-
-        items = new ArrayList<>(); //items on the floor
     }
     
     public void wPressed(){
@@ -105,17 +102,6 @@ public class Level{
     public void dReleased(){
         if(!pause)
             player.speedX = 0;
-    }
-
-    public void Item_picked()
-    {
-        for (Item i : items)
-        {
-            if (i.intersects(player))
-            {
-                i.taken = true;
-            }
-        }
     }
     
     public void levelLogic(){
