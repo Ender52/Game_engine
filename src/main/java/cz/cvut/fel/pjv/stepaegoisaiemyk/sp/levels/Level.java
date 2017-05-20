@@ -79,7 +79,7 @@ public class Level{
     
     public void spacePressed(){
         if(!pause){
-            player.simpleAttack();
+            player.charging();
         }
     }
 
@@ -102,6 +102,17 @@ public class Level{
     public void dReleased(){
         if(!pause)
             player.speedX = 0;
+    }
+    
+    public void spaceReleased(){
+        if(!pause){
+            if(player.charge > 5 && player.speedX == 0 && player.speedY == 0){
+                player.heavyAttack();
+            }else{
+                player.simpleAttack();
+            }
+            player.charge = 0;
+        }
     }
     
     public void levelLogic(){

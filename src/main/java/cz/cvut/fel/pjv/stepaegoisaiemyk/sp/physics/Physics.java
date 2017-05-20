@@ -14,7 +14,7 @@ public class Physics {
         Game.level.levelLogic();
         for(Creature c : Game.level.creatures){
             int x = 0, y = 0;
-            if(c.active && collision(c)){
+            if(c.active && c.alive && collision(c)){
                 if(collision(c.sencorT) || collisionCreature(c)){
                     y += 1;
                 }
@@ -44,7 +44,7 @@ public class Physics {
     
     private boolean collisionCreature(Rectangle r){
         for(Creature c: Game.level.creatures){
-            if(r != c && r.intersects(c)){
+            if(c.alive && r != c && r.intersects(c)){
                 return true;
             }
         }

@@ -6,11 +6,12 @@ import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.*;
 
 public class Player extends Creature{
     public ArrayList<Rectangle> simpleAttackRanges;
-    public int range = 10;
+    public int range = 20;
+    public int charge = 0;
     public int direction;
     
-    public Player(int x, int y, int width, int height, int speed, boolean active, int weight) {
-        super(x, y, width, height, speed, active, weight);
+    public Player(int x, int y, int width, int height, int speed, boolean active, int weight, int health) {
+        super(x, y, width, height, speed, active, weight, health);
         direction = 2;
         simpleAttackRanges = new ArrayList<>();
         simpleAttackRanges.add(new Rectangle(x, y - range, width, range));
@@ -21,13 +22,33 @@ public class Player extends Creature{
     }
     
     public void simpleAttack(){
+        System.out.println("Simple attack!");
         for(Creature c : Game.level.creatures){
             if(c == Game.level.player){
                 continue;
             }
-            if(simpleAttackRanges.get(direction).intersects(c) || simpleAttackRanges.get(direction).contains(c)){
+            if(c.alive && simpleAttackRanges.get(direction).intersects(c)){
                 System.out.println("Gotcha!");
                 c.gotHit(10);
+            }
+        }
+    }
+    
+    public void charging(){
+        charge ++;
+    }
+    
+    public void heavyAttack(){
+        speedX = 0;
+        speedY = 0;
+        System.out.println("Heavy attack!");
+        for(Creature c : Game.level.creatures){
+            if(c == Game.level.player || !c.alive){
+                continue;
+            }
+            if(simpleAttackRanges.get(direction).intersects(c)){
+                System.out.println("Gotcha!");
+                c.gotHit(20);
             }
         }
     }
