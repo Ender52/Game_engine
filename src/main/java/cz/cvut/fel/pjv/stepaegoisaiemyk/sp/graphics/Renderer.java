@@ -42,6 +42,21 @@ public class Renderer extends JPanel{
             g.setColor(c.color);
             g.fillRect(windowX + c.x, windowY + c.y, c.width, c.height);
         }
+
+        //items
+        for(Item i : Game.level.items){
+            Game.level.Item_picked();
+            if(i.taken){
+                continue;
+            }
+            g.setColor(i.color);
+            g.fillRect(windowX + i.x, windowY + i.y, i.width, i.height);
+        }
+
+        for(Item i : Game.level.player.inventory){
+
+
+        }
         
         for(Obstacle r : Game.level.obstacles){
             g.setColor(r.color);

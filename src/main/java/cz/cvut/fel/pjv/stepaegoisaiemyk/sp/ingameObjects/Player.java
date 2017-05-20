@@ -6,6 +6,7 @@ import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.*;
 
 public class Player extends Creature{
     public ArrayList<Rectangle> simpleAttackRanges;
+    public ArrayList<Item> inventory;
     public int range = 20;
     public int charge = 0;
     public int direction;
@@ -18,6 +19,8 @@ public class Player extends Creature{
         simpleAttackRanges.add(new Rectangle(x + width, y, range, height));
         simpleAttackRanges.add(new Rectangle(x, y + height, width, range));
         simpleAttackRanges.add(new Rectangle(x - range, y, range, height));
+
+        inventory = new ArrayList<>(); //inventory
         name = "Player";
     }
     

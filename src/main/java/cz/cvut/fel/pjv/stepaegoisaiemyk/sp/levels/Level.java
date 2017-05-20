@@ -73,6 +73,11 @@ public class Level{
         pause = !pause;
         pause();
     }
+
+    public void iPressed(){
+        pause = !pause;
+        open_inventory();
+    }
     
     public void enterPressed(){
         if(pause){
@@ -85,7 +90,6 @@ public class Level{
             player.charging();
         }
     }
-
     
     public void wReleased(){
         if(!pause)
@@ -117,11 +121,34 @@ public class Level{
             player.charge = 0;
         }
     }
+
+    public void Item_picked()
+    {
+        for (Item i : items)
+        {
+            if(i.intersects(player) && !i.taken)
+            {
+                i.taken = true;
+                System.out.println("item is being picked");
+                player.inventory.add(i);
+            }
+        }
+    }
     
     public void levelLogic(){
         pause();
     }
-    
+
+    public void open_inventory(){
+        if(pause){
+           menu = new InventoryMenu(100,100, WIDTH - 200, 330);
+           menus.add(menu);
+        }else{
+            menus.remove(menu);
+            menu = null;
+        }
+    }
+
     public void pause(){
         if(pause){
             menu = new MainMenu(300, 100, WIDTH - 600, HEIGHT - 200);

@@ -1,9 +1,10 @@
-package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus;
+package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.Buttons;
 
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.levels.*;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.IngameButton;
 
-public class LevelOneStartButton extends IngameButton{
+public class LevelOneStartButton extends IngameButton {
 
     public LevelOneStartButton(String s, int x, int y, int pos) {
         super(s, x, y, pos);

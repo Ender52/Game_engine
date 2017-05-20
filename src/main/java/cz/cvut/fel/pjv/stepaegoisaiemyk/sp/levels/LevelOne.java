@@ -2,15 +2,18 @@ package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.levels;
 
 import java.awt.Color;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.*;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Key;
 
 public class LevelOne extends Level{
     public LevelOne() {  //constructor
         pause = false;
         color = Color.getHSBColor(0.66f, 0.4f, 0.5f);
         player = new Player(WIDTH / 2 - 20, HEIGHT / 2 - 20, 40, 40, 3, true, 10, 100);
+
         creatures.add(player);
         creatures.add(new Creature(300, 300, 15, 15, 1, true, 3, 50));
         creatures.get(1).speedX = 1;
+
         obstacles.add(new Obstacle(0, 0, 15, HEIGHT));
         obstacles.add(new Obstacle(WIDTH-15, 0, 15, HEIGHT));
         obstacles.add(new Obstacle(0, 0, WIDTH, 15));
@@ -18,6 +21,14 @@ public class LevelOne extends Level{
         obstacles.add(new Obstacle(200, 0, 15, 200));
         obstacles.add(new Obstacle(300, 0, 15, 200));
         obstacles.add(new Obstacle(0, 185, 200, 15));
+
+        items.add(new Key(400,400,15,15,false));
+        //items.add(new Key(500,500,15,15,false));
+        //items.add(new Key(500,500,15,15,false));
+        //items.add(new Key(500,500,15,15,false));
+        items.add(new Key(500,500,15,15,false));
+
+
 
         /*for(int i = 0; i < 100; i++){
             obstacles.add(new Obstacle(0, 185, 200, 15));

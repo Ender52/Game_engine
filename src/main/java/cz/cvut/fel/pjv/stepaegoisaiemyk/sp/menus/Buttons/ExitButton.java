@@ -1,6 +1,8 @@
-package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus;
+package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.Buttons;
 
-public class ExitButton extends IngameButton{
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.IngameButton;
+
+public class ExitButton extends IngameButton {
 
     public ExitButton(String s, int x, int y, int pos) {
         super(s, x, y, pos);

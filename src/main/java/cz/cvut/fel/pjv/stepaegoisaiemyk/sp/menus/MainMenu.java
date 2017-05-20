@@ -1,6 +1,8 @@
 package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus;
 
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.*;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.Buttons.ExitButton;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.Buttons.LevelOneStartButton;
 
 public class MainMenu extends IngameMenu{
     public MainMenu(int x, int y, int width, int height) {
