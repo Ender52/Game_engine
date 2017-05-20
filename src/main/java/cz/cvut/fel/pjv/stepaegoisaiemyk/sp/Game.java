@@ -85,6 +85,9 @@ public class Game implements KeyListener, ActionListener {
         if (e.getKeyCode() == KeyEvent.VK_I) {
             level.iPressed();
         }
+        if(e.getKeyCode() == KeyEvent.VK_E){
+            level.ePressed();
+        }
     }
 
     @Override
@@ -103,6 +106,9 @@ public class Game implements KeyListener, ActionListener {
         }
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {  //right
             level.spaceReleased();
+        }
+        if(e.getKeyCode() == KeyEvent.VK_E){
+            level.eReleased();
         }
     }
 

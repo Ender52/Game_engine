@@ -10,6 +10,7 @@ public class Player extends Creature{
     public int range = 20;
     public int charge = 0;
     public int direction;
+    public Rectangle grapplingHook = null;
     
     public Player(int x, int y, int width, int height, int speed, boolean active, int weight, int health) {
         super(x, y, width, height, speed, active, weight, health);
@@ -54,6 +55,27 @@ public class Player extends Creature{
                 c.gotHit(20);
             }
         }
+    }
+    
+    private void grapplingHookInit(){
+        grapplingHook = new Rectangle(0,0, 0, 0);
+        System.out.println("The hook's been initialized!");
+    }
+    
+    public void grapplingHookShoot(){
+        if(grapplingHook == null){
+            grapplingHookInit();
+        }
+        System.out.println("Shooting the hook...");
+    }
+    
+    public void grapplingHookPull(){
+        System.out.println("Pulling the hook...");
+    }
+    
+    public void grapplingHookTerm(){
+        grapplingHook = null;
+        System.out.println("The hook's been stopped!");
     }
     
     @Override

@@ -90,6 +90,10 @@ public class Level {
             player.charging();
         }
     }
+    
+    public void ePressed(){
+        player.grapplingHookShoot();
+    }
 
     public void wReleased() {
         if (!pause)
@@ -120,6 +124,10 @@ public class Level {
             }
             player.charge = 0;
         }
+    }
+    
+    public void eReleased(){
+        player.grapplingHookTerm();
     }
 
     public void removeDead() {
