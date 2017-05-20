@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.levels.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.graphics.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.physics.Physics;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -22,7 +24,7 @@ public class Game implements KeyListener, ActionListener{
     int time;
     public Game() {
         frame = new JFrame();  //the window itself
-        /*window mode*/
+        /*window mode*//**/
         frame.setSize(WIDTH+6, HEIGHT+28);  // size includes the frame
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
@@ -92,6 +94,9 @@ public class Game implements KeyListener, ActionListener{
         }
         if(e.getKeyCode() == KeyEvent.VK_D){  //right
             level.dReleased();
+        }
+        if(e.getKeyCode() == KeyEvent.VK_SPACE){  //right
+            level.spaceReleased();
         }
     }
 

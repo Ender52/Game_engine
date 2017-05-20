@@ -1,16 +1,18 @@
 package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects;
 
-
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.Game;
 import java.awt.Color;
 import java.awt.Rectangle;
 
 public class Creature extends Solid{
-    public int speed, speedX, speedY;
+    public int speed, speedX, speedY, health;
     public Rectangle sencorT, sencorB, sencorR, sencorL;
     public Color color = Color.white;
     public String name = "Creature";
+    public boolean alive;
     
-    public Creature(int x, int y, int width, int height, int speed, boolean active, int weight) {
+    public Creature(int x, int y, int width, int height, int speed, boolean active, int weight, int health) {
+        alive = true;
         this.x = x;
         this.y = y;
         this.width = width;
@@ -18,6 +20,7 @@ public class Creature extends Solid{
         this.speed = speed;
         this.active = active;
         this.weight = weight;
+        this.health = health;
         sencorT = new Rectangle(this.x, this.y, this.width, this.height / 4);
         sencorB = new Rectangle(this.x, y + this.height - this.height/4, this.width, this.height / 4);
         sencorR = new Rectangle(this.x + this.width - this.width / 4, y, this.width / 4, this.height);
@@ -38,7 +41,19 @@ public class Creature extends Solid{
     }
     
     public void gotHit(int dmg){
-        System.out.println(name + ": Ouch! -" + dmg);
+        if(health > 1){
+            System.out.println(name + ": Ouch! -" + dmg);
+            health -= dmg;
+            if(health < 1){
+                die();
+            }
+        }
+    }
+    
+    public void die(){
+        System.out.println("The creature " + name + " is dead now.");
+        alive = false;
+        //Game.level.creatures.remove(this);
     }
 
 }

@@ -36,6 +36,9 @@ public class Renderer extends JPanel{
         
         //middleground
         for(Creature c : Game.level.creatures){
+            if(!c.alive){
+                continue;
+            }
             g.setColor(c.color);
             g.fillRect(windowX + c.x, windowY + c.y, c.width, c.height);
         }
@@ -64,6 +67,7 @@ public class Renderer extends JPanel{
         g.drawString("FPS: " + fps, 5, 15);
         g.drawString("Number of obstacles: " + Game.level.obstacles.size(), 5, 30);
         g.drawString("Number of creatures: " + Game.level.creatures.size(), 5, 45);
+        g.drawString("Charging: " + Game.level.player.charge, 5, 60);
         /**/
     }
     
