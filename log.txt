@@ -1,0 +1,4 @@
+мая 21, 2017 2:28:12 AM cz.cvut.fel.pjv.stepaegoisaiemyk.sp.Start main
+INFO: Info msg
+мая 21, 2017 2:28:12 AM cz.cvut.fel.pjv.stepaegoisaiemyk.sp.Start main
+SEVERE: Sever msg
