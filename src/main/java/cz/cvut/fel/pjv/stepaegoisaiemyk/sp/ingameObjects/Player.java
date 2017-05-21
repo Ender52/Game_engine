@@ -3,6 +3,7 @@ package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.*;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Key;
 
 public class Player extends Creature{
     public ArrayList<Rectangle> simpleAttackRanges;
@@ -76,6 +77,20 @@ public class Player extends Creature{
     public void grapplingHookTerm(){
         grapplingHook = null;
         System.out.println("The hook's been stopped!");
+    }
+
+    public void openDoor(){
+        for (Obstacle o : Game.level.obstacles){
+            for(Item i : Game.level.player.inventory)
+            if (o instanceof Door && i instanceof Key)
+            {
+                if(i.equiped == true)
+                {
+                    ((Door) o).active = false;
+                    System.out.println("Door opened");
+                }
+            }
+        }
     }
     
     @Override

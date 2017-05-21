@@ -88,6 +88,9 @@ public class Game implements KeyListener, ActionListener {
         if(e.getKeyCode() == KeyEvent.VK_E){
             level.ePressed();
         }
+        if(e.getKeyCode() == KeyEvent.VK_F){
+            level.fPressed();
+        }
     }
 
     @Override

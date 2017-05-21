@@ -34,7 +34,7 @@ public class Level {
 
         items = new ArrayList<>(); //items on the floor
 
-        menus = new ArrayList<>();
+        menus = new ArrayList<>();  //menus
     }
 
     public void wPressed() {
@@ -90,6 +90,8 @@ public class Level {
             player.charging();
         }
     }
+
+    public void fPressed() {player.openDoor();}
     
     public void ePressed(){
         player.grapplingHookShoot();
@@ -139,6 +141,11 @@ public class Level {
         for (int i = 0; i < creatures.size(); i++) {
             if (creatures.get(i).alive == false) {
                 creatures.remove(creatures.get(i));
+            }
+        }
+        for (int i = 0; i < obstacles.size(); i++){
+            if(obstacles.get(i).active == false) {
+                obstacles.remove(obstacles.get(i));
             }
         }
     }

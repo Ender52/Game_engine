@@ -85,7 +85,6 @@ public class Physics {
         for (Item i : Game.level.items) {
             if (i.intersects(Game.level.player) && !i.taken) {
                 i.taken = true;
-                //System.out.println("item is being picked");
                 Game.level.player.inventory.add(i);
             }
         }
