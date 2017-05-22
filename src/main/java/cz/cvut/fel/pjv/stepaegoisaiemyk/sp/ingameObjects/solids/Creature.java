@@ -66,7 +66,7 @@ public class Creature extends Solid {
      * @param dmg The amount of damage the creature will get
      */
 
-    void gotHit(int dmg) {
+    public void gotHit(int dmg) {
         if (health > 1) {
             System.out.println(name + ": Ouch! -" + dmg);
             health -= dmg;
@@ -75,6 +75,12 @@ public class Creature extends Solid {
             }
         }
     }
+
+    public int getHealth(){
+       return this.health;
+    }
+
+
 
     private void die() {
         System.out.println("The creature " + name + " is dead now.");
