@@ -20,9 +20,8 @@ import java.util.Calendar;
  * <p>The renderer class is responible for the graphical representation of all the elements in the game</p>
  * <p>It renders all objects on the level and all UI elements including pause menus</p>
  * <p>It is called every "tick"</p>
- * 
+ * <p>
  * <p>Also contains some testing constractions such as FPS counter</p>
- * 
  */
 public class Renderer extends JPanel {
     int windowX, windowY, realtime = 0, framecount = 0, fps = 0;
@@ -45,7 +44,7 @@ public class Renderer extends JPanel {
     }
 
     private void render(Graphics g) {
-        if(Game.level.player != null){
+        if (Game.level.player != null) {
             windowX = -Game.level.player.x + (Game.WIDTH / 2 - 20);
             windowY = -Game.level.player.y + (Game.HEIGHT / 2 - 20);
         }
@@ -54,16 +53,13 @@ public class Renderer extends JPanel {
         g.fillRect((int) (windowX), (int) (windowY), Game.WIDTH, Game.HEIGHT);
 
         //testing
-        if(Game.level.player != null){
+        if (Game.level.player != null) {
             g.setColor(Color.red);
             Rectangle rect = Game.level.player.simpleAttackRanges.get(Game.level.player.direction);
             g.fillRect(windowX + rect.x, windowY + rect.y, rect.width, rect.height);
         }
         //middleground
         for (Creature c : Game.level.creatures) {
-            //if(!c.alive){
-            //    continue;
-            //}
             g.setColor(c.color);
             g.fillRect(windowX + c.x, windowY + c.y, c.width, c.height);
             //g.drawImage(playerImage,windowX + c.x, windowY + c.y, c.width, c.height, null);
@@ -103,7 +99,7 @@ public class Renderer extends JPanel {
         g.drawString("FPS: " + fps, 5, 15);
         g.drawString("Number of obstacles: " + Game.level.obstacles.size(), 5, 30);
         g.drawString("Number of creatures: " + Game.level.creatures.size(), 5, 45);
-        if(Game.level.player != null){
+        if (Game.level.player != null) {
             g.drawString("Charging: " + Game.level.player.charge, 5, 60);
         }
         /**/
@@ -126,13 +122,4 @@ public class Renderer extends JPanel {
             g.drawString(b.name, b.fontX, b.fontY);
         }
     }
-
-    /*public void drawItem(Graphics g, Item i, Item i2){
-        int ix = i2.x;
-        int iy = i2.y;
-        int iwidth = i2.width;
-        int iheight = i2.height;
-        g.setColor(i.color);
-        g.fillRect(windowX + ix, windowY + iy, iwidth, iheight);
-    }*/
 }

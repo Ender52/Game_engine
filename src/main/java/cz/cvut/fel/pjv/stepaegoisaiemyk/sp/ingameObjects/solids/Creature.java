@@ -41,7 +41,7 @@ public class Creature extends Solid {
         sencorB = new Rectangle(this.x, y + this.height - this.height / 4, this.width, this.height / 4);
         sencorR = new Rectangle(this.x + this.width - this.width / 4, y, this.width / 4, this.height);
         sencorL = new Rectangle(this.x, this.y, this.width / 4, this.height);
-        
+
         direction = 0;                      //0 - top, 1 - right, 2 - bottom, 3 - left
         simpleAttackRanges = new ArrayList<>();
         simpleAttackRanges.add(new Rectangle(x, y - range, width, range));
@@ -59,24 +59,24 @@ public class Creature extends Solid {
 
     public void reloc(int x, int y) {
         this.x = x;
-        
+
         sencorT.x = x;
         sencorB.x = x;
         sencorR.x = x + width - width / 4;
         sencorL.x = x;
-        
+
         simpleAttackRanges.get(0).x = x;
         simpleAttackRanges.get(1).x = x + width;
         simpleAttackRanges.get(2).x = x;
         simpleAttackRanges.get(3).x = x - range;
-        
+
         this.y = y;
-        
+
         sencorT.y = y;
         sencorB.y = y + height - height / 4;
         sencorR.y = y;
         sencorL.y = y;
-        
+
         simpleAttackRanges.get(0).y = y - range;
         simpleAttackRanges.get(1).y = y;
         simpleAttackRanges.get(2).y = y + height;
@@ -104,10 +104,9 @@ public class Creature extends Solid {
      *
      * @return The health of the creature
      */
-    public int getHealth(){
-       return this.health;
+    public int getHealth() {
+        return this.health;
     }
-
 
 
     private void die() {
@@ -115,7 +114,7 @@ public class Creature extends Solid {
         alive = false;
         Game.new_log.writeToLog("Creature " + name + " died", "INFO");
     }
-    
+
     /**
      * <p>Simple attack</p>
      * <p>This type of attack will deal 10 damage</p>

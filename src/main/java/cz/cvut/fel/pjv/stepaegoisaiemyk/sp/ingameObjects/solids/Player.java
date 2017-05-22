@@ -9,7 +9,6 @@ import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Key;
 
 /**
  * The class responsible for logical and graphical representation of the player in the game </p>
- * 
  */
 public class Player extends Creature {
     public ArrayList<Item> inventory;
@@ -70,7 +69,6 @@ public class Player extends Creature {
 
     /**
      * <p>Shooting the grappling hook</p>
-     * 
      */
     public void grapplingHookShoot() {
         if (grapplingHook == null) {
@@ -89,7 +87,6 @@ public class Player extends Creature {
 
     /**
      * <p>Grappling hook termination</p>
-     * 
      */
     public void grapplingHookTerm() {
         grapplingHook = null;
@@ -98,11 +95,12 @@ public class Player extends Creature {
 
     /**
      * <p>Openning the door</p>
-     * <p>The door will open only if the key is equiped and player stays right next to the door</p>     */
+     * <p>The door will open only if the key is equiped and player stays right next to the door</p>
+     */
 
     public void openDoor() {
         for (Obstacle o : Game.level.obstacles) {
-            for (Item i : Game.level.player.inventory)
+            for (Item i : Game.level.player.inventory) {
                 if (o instanceof Door && i instanceof Key) {
                     if (i.equiped == true && Game.level.pause == false) {
                         ((Door) o).active = false;
@@ -110,39 +108,7 @@ public class Player extends Creature {
                         Game.new_log.writeToLog("Door is opened", "INFO");
                     }
                 }
+            }
         }
-
     }
-
-    /**
-     * <p>Relocate the player</p>
-     *
-     * @param x The X coordinate, which tells for how much the player will be relocated
-     * @param y The Y coordinate, which tells for how much the player will be relocated
-     */
-    @Override
-    public void reloc(int x, int y) {
-        this.x = x;
-        sencorT.x = x;
-        sencorB.x = x;
-        sencorR.x = x + width - width / 4;
-        sencorL.x = x;
-
-        simpleAttackRanges.get(0).x = x;
-        simpleAttackRanges.get(1).x = x + width;
-        simpleAttackRanges.get(2).x = x;
-        simpleAttackRanges.get(3).x = x - range;
-
-        this.y = y;
-        sencorT.y = y;
-        sencorB.y = y + height - height / 4;
-        sencorR.y = y;
-        sencorL.y = y;
-
-        simpleAttackRanges.get(0).y = y - range;
-        simpleAttackRanges.get(1).y = y;
-        simpleAttackRanges.get(2).y = y + height;
-        simpleAttackRanges.get(3).y = y;
-    }
-
 }

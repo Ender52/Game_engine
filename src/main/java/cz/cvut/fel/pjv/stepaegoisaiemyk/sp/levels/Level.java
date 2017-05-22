@@ -2,6 +2,7 @@ package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.levels;
 
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Item;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Key;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Creature;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Obstacle;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Player;
@@ -9,7 +10,11 @@ import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.physics.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.*;
 
 import java.awt.Color;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import static cz.cvut.fel.pjv.stepaegoisaiemyk.sp.Game.new_log;
 
 
 public class Level {
@@ -97,6 +102,10 @@ public class Level {
     public void iPressed() {
         pause = !pause;
         openInventory();
+    }
+
+    public void rPressed(){
+        dropItem();
     }
 
     /**
@@ -204,13 +213,19 @@ public class Level {
                 obstacles.remove(obstacles.get(i));
             }
         }
+        if (Game.level.player != null) {
+            for (int i = 0; i < player.inventory.size(); i++) {
+                if (player.inventory.get(i).taken == false) {
+                    player.inventory.remove(player.inventory.get(i));
+                }
+            }
+        }
     }
 
     /**
      * <p>TBD</p>
      */
     public void levelLogic() {
-        //pause();
     }
 
     /**
@@ -226,6 +241,24 @@ public class Level {
         }
     }
 
+    private void dropItem() {
+        for (Item i : player.inventory) {
+            if (i.equiped == true) {
+                i.taken = false;
+                i.equiped = false;
+                i.x = player.x+100;
+                i.y = player.y+100;
+                items.add(i);
+                Game.new_log.writeToLog("Item " + i.name + " is dropped", "INFO");
+            }
+        }
+
+    }
+
+    /**
+     * <p>Checking direction</p>
+     * <p>The creature must look the same direction it moves</p>
+     */
     public void checkDirection() {
         if (player.speedX < 0) {
             player.direction = 3;
@@ -241,6 +274,10 @@ public class Level {
         }
     }
 
+    /**
+     * <p>Pausing the game</p>
+     * <p>Opens pause menu</p>
+     */
     public void pause() {
         if (pause) {
             menu = new PauseMenu(300, 100, WIDTH - 600, HEIGHT - 200);
@@ -249,5 +286,23 @@ public class Level {
             menus.remove(menu);
             menu = null;
         }
+    }
+
+    public void loadInventory(String s) {               //under construction
+        try {
+            Scanner sc = new Scanner(new FileInputStream(s), "UTF-8");
+            if (sc.nextInt() == 1) {
+                player.inventory.add(new Key(1, 1, 15, 15, true, false));
+            } else if (sc.nextInt() == 2) {
+                //
+            } else if (sc.next() == " ") {
+                // continue;
+            } else if (sc.next() == "a") {
+                //break;
+            }
+        } catch (IOException e1) {
+            Game.new_log.writeToLog("IOException", "SEVERE");
+        }
+
     }
 }

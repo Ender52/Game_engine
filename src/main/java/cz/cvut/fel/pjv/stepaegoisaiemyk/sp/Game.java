@@ -17,12 +17,10 @@ import javax.swing.Timer;
 
 /**
  * <p>The main class that contains the JFrame and all the logical and graphical representation of the game</p>
- * 
  */
 public class Game implements KeyListener, ActionListener {
     public static int WIDTH = 800, HEIGHT = 600;
-    public static
-    JFrame frame;
+    public static JFrame frame;
     public static Level level;
     public static Renderer renderer;
     Physics physics;
@@ -105,6 +103,9 @@ public class Game implements KeyListener, ActionListener {
         }
         if (e.getKeyCode() == KeyEvent.VK_F) {
             level.fPressed();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_R){
+            level.rPressed();
         }
     }
 

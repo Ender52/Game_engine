@@ -20,5 +20,4 @@ public class Obstacle extends Solid {
         this.width = width;
         weight = 10000;
     }
-
 }

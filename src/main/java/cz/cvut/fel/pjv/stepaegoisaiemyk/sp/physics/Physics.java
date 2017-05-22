@@ -6,10 +6,10 @@ import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Creature;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Obstacle;
 
 import java.awt.Rectangle;
+
 /**
  * <p>The main logic class</p>
  * <p>Checks if the current logical situation of the game fits the laws of the world and fixes it if it doesn't</p>
- * 
  */
 public class Physics {
 
@@ -95,11 +95,8 @@ public class Physics {
             if (i.intersects(Game.level.player) && !i.taken && Game.level.player.inventory.size() < 5) {
                 i.taken = true;
                 Game.level.player.inventory.add(i);
-                Game.new_log.writeToLog("Item "+ i.name +" is picked", "INFO");
+                Game.new_log.writeToLog("Item " + i.name + " is picked", "INFO");
             }
         }
-
     }
-
-
 }
