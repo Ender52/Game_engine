@@ -76,6 +76,11 @@ public class Creature extends Solid {
         }
     }
 
+    /**
+     * <p>Getter for creature's health variable</p>
+     *
+     * @return The health of the creature
+     */
     public int getHealth(){
        return this.health;
     }

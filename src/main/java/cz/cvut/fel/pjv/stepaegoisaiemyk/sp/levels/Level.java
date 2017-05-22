@@ -168,7 +168,7 @@ public class Level {
      */
     public void spaceReleased() {
         if (!pause) {
-            if (player.charge > 5 && player.speedX == 0 && player.speedY == 0) {
+            if (player.charge > 10 && player.speedX == 0 && player.speedY == 0) {
                 player.heavyAttack();
             } else {
                 player.simpleAttack();
