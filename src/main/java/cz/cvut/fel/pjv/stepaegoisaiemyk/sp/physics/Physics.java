@@ -33,7 +33,7 @@ public class Physics {
             react(c, x, y);
         }
         ItemPicked();
-
+        Game.level.checkDirection();
     }
 
 
@@ -86,7 +86,11 @@ public class Physics {
             if (i.intersects(Game.level.player) && !i.taken) {
                 i.taken = true;
                 Game.level.player.inventory.add(i);
+                Game.new_log.writeToLog("Item is picked", "INFO");
             }
         }
+
     }
+
+
 }

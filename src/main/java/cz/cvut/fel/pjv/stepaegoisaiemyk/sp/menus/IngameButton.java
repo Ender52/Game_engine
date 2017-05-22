@@ -2,11 +2,12 @@ package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus;
 
 
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.Game;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
 
-public class IngameButton extends Rectangle{
+public class IngameButton extends Rectangle {
     public Color color = Color.DARK_GRAY.darker(), activeColor = Color.DARK_GRAY, fontColor = Color.getHSBColor(0.5f, 0.6f, 0.7f), fontColorActive = Color.getHSBColor(0.5f, 0.6f, 0.7f);
     public Font font = new Font("Arial", 1, 35);
     public String name;
@@ -19,8 +20,8 @@ public class IngameButton extends Rectangle{
         name = s;
         positionInList = pos;
     }
-    
-    public void selectAction(){
+
+    public void selectAction() {
         System.out.println("None");
     }
 }

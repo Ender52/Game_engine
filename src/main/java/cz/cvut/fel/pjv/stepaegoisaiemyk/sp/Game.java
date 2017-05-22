@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.levels.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.graphics.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.physics.Physics;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.utils.Log;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -24,6 +25,8 @@ public class Game implements KeyListener, ActionListener {
     Physics physics;
     Timer timer;
     int time;
+
+    public static Log new_log;
 
     public Game() {
         frame = new JFrame();  //the window itself
@@ -53,6 +56,9 @@ public class Game implements KeyListener, ActionListener {
         level = new LevelOne();
         time = 0;
         timer.start();
+
+        new_log = Log.getObject();
+        new_log.writeToLog("Game started", "INFO");
     }
 
     @Override
@@ -85,10 +91,10 @@ public class Game implements KeyListener, ActionListener {
         if (e.getKeyCode() == KeyEvent.VK_I) {
             level.iPressed();
         }
-        if(e.getKeyCode() == KeyEvent.VK_E){
+        if (e.getKeyCode() == KeyEvent.VK_E) {
             level.ePressed();
         }
-        if(e.getKeyCode() == KeyEvent.VK_F){
+        if (e.getKeyCode() == KeyEvent.VK_F) {
             level.fPressed();
         }
     }
@@ -110,7 +116,7 @@ public class Game implements KeyListener, ActionListener {
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {  //right
             level.spaceReleased();
         }
-        if(e.getKeyCode() == KeyEvent.VK_E){
+        if (e.getKeyCode() == KeyEvent.VK_E) {
             level.eReleased();
         }
     }

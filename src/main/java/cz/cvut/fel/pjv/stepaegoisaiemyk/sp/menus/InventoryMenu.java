@@ -19,8 +19,7 @@ public class InventoryMenu extends IngameMenu {
 
     public void listItems() {
         for (int i = 0; i < Game.level.player.inventory.size(); i++) {
-            if (Game.level.player.inventory.get(i).name == "Key")
-            {
+            if (Game.level.player.inventory.get(i).name == "Key") {
                 buttons.add(new KeyButton(Game.level.player.inventory.get(i).name, x + 15, y + 15 + 50 * i, i));
             } else {
                 buttons.add(new ItemButton(Game.level.player.inventory.get(i).name, x + 15, y + 15 + 50 * i, i));

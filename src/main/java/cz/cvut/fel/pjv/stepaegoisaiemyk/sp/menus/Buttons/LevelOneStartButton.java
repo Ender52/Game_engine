@@ -9,9 +9,10 @@ public class LevelOneStartButton extends IngameButton {
     public LevelOneStartButton(String s, int x, int y, int pos) {
         super(s, x, y, pos);
     }
-    
+
     @Override
     public void selectAction() {
         Game.level = new LevelOne();
+        Game.new_log.writeToLog("Level One started", "INFO");
     }
 }

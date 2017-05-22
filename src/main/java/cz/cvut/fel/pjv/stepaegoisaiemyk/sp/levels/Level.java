@@ -40,7 +40,6 @@ public class Level {
     public void wPressed() {
         if (!pause) {
             player.speedY = -player.speed;
-            player.direction = 0;
         } else {
             menu.wPressed();
         }
@@ -49,7 +48,6 @@ public class Level {
     public void sPressed() {
         if (!pause) {
             player.speedY = player.speed;
-            player.direction = 2;
         } else {
             menu.sPressed();
         }
@@ -58,14 +56,12 @@ public class Level {
     public void aPressed() {
         if (!pause) {
             player.speedX = -player.speed;
-            player.direction = 3;
         }
     }
 
     public void dPressed() {
         if (!pause) {
             player.speedX = player.speed;
-            player.direction = 1;
         }
     }
 
@@ -91,9 +87,11 @@ public class Level {
         }
     }
 
-    public void fPressed() {player.openDoor();}
-    
-    public void ePressed(){
+    public void fPressed() {
+        player.openDoor();
+    }
+
+    public void ePressed() {
         player.grapplingHookShoot();
     }
 
@@ -127,8 +125,8 @@ public class Level {
             player.charge = 0;
         }
     }
-    
-    public void eReleased(){
+
+    public void eReleased() {
         player.grapplingHookTerm();
     }
 
@@ -143,8 +141,8 @@ public class Level {
                 creatures.remove(creatures.get(i));
             }
         }
-        for (int i = 0; i < obstacles.size(); i++){
-            if(obstacles.get(i).active == false) {
+        for (int i = 0; i < obstacles.size(); i++) {
+            if (obstacles.get(i).active == false) {
                 obstacles.remove(obstacles.get(i));
             }
         }
@@ -161,6 +159,21 @@ public class Level {
         } else {
             menus.remove(menu);
             menu = null;
+        }
+    }
+
+    public void checkDirection() {
+        if (player.speedX < 0) {
+            player.direction = 3;
+        }
+        if (player.speedX > 0) {
+            player.direction = 1;
+        }
+        if (player.speedY < 0) {
+            player.direction = 0;
+        }
+        if (player.speedY > 0) {
+            player.direction = 2;
         }
     }
 

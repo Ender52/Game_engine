@@ -3,9 +3,11 @@ package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.graphics;
 import java.awt.Graphics;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.*;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
@@ -13,9 +15,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-     
 
-public class Renderer extends JPanel{
+
+public class Renderer extends JPanel {
     int windowX, windowY, realtime = 0, framecount = 0, fps = 0;
 
     /*private BufferedImage playerImage;                            //this is for the drawing images
@@ -30,26 +32,25 @@ public class Renderer extends JPanel{
     }*/
 
     @Override
-    protected void paintComponent(Graphics g)
-    {
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         render(g);
     }
-    
-    private void render(Graphics g){
-        windowX = -Game.level.player.x + (Game.WIDTH/2 - 20);
-        windowY = -Game.level.player.y + (Game.HEIGHT/2 - 20);
+
+    private void render(Graphics g) {
+        windowX = -Game.level.player.x + (Game.WIDTH / 2 - 20);
+        windowY = -Game.level.player.y + (Game.HEIGHT / 2 - 20);
         g.setColor(Game.level.color);
         //background
-        g.fillRect((int)(windowX ), (int)(windowY), Game.WIDTH, Game.HEIGHT);
-        
+        g.fillRect((int) (windowX), (int) (windowY), Game.WIDTH, Game.HEIGHT);
+
         //testing
         g.setColor(Color.red);
         Rectangle rect = Game.level.player.simpleAttackRanges.get(Game.level.player.direction);
         g.fillRect(windowX + rect.x, windowY + rect.y, rect.width, rect.height);
-        
+
         //middleground
-        for(Creature c : Game.level.creatures){
+        for (Creature c : Game.level.creatures) {
             //if(!c.alive){
             //    continue;
             //}
@@ -59,18 +60,18 @@ public class Renderer extends JPanel{
         }
 
         //items
-        for(Item i : Game.level.items){
+        for (Item i : Game.level.items) {
             g.setColor(i.color);
             g.fillRect(windowX + i.x, windowY + i.y, i.width, i.height);
         }
-        
-        for(Obstacle r : Game.level.obstacles){
+
+        for (Obstacle r : Game.level.obstacles) {
             g.setColor(r.color);
             g.fillRect(windowX + r.x, windowY + r.y, r.width, r.height);
         }
 
         //UI
-        for(IngameMenu m : Game.level.menus){
+        for (IngameMenu m : Game.level.menus) {
             menuRender(m, g);
         }
         
@@ -79,7 +80,7 @@ public class Renderer extends JPanel{
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("ss");
         String s = sdf.format(cal.getTime());
-        if(Integer.valueOf(s) != realtime){
+        if (Integer.valueOf(s) != realtime) {
             fps = framecount;
             framecount = 0;
             realtime = Integer.valueOf(s);
@@ -92,18 +93,18 @@ public class Renderer extends JPanel{
         g.drawString("Charging: " + Game.level.player.charge, 5, 60);
         /**/
     }
-    
+
     public void menuRender(IngameMenu m, Graphics g) {
         g.setColor(m.color);
         g.fillRect(m.x, m.y, m.width, m.height);
-        for(IngameButton b : m.buttons){
+        for (IngameButton b : m.buttons) {
             g.setColor(b.color);
-            if(b.positionInList == m.position){
+            if (b.positionInList == m.position) {
                 g.setColor(b.activeColor);
             }
             g.fillRect(b.x, b.y, b.width, b.height);
             g.setColor(b.fontColor);
-            if(b.positionInList == m.position){
+            if (b.positionInList == m.position) {
                 g.setColor(b.fontColorActive);
             }
             g.setFont(b.font);

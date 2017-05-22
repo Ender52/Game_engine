@@ -14,6 +14,7 @@ public class KeyButton extends ItemButton {
     public void selectAction() {
         Game.level.player.inventory.get(positionInList).equiped = true;
         System.out.println("Key equiped");
+        Game.new_log.writeToLog("Key is equiped", "INFO");
     }
 
 }

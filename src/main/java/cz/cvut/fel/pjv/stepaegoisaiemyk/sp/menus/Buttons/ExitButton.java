@@ -9,7 +9,7 @@ public class ExitButton extends IngameButton {
 
     public ExitButton(String s, int x, int y, int pos) {
         super(s, x, y, pos);
-        new_log = Log.getObject();
+        //new_log = Log.getObject();
     }
 
     @Override
