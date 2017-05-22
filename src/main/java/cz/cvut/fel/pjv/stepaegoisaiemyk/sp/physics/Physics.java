@@ -1,13 +1,18 @@
 package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.physics;
 
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.*;
-import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.*;
-import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.utils.Log;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Item;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Creature;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Obstacle;
 
 import java.awt.Rectangle;
 
 public class Physics {
 
+    /**
+     * <p>Initializing the physics</p>
+     * <p>TBD</p>
+     */
     public void run() {
         if (Game.level.pause) {
             return;
@@ -55,7 +60,7 @@ public class Physics {
         return false;
     }
 
-    public void move(Creature r, int x, int y, int speed) {  //changes the position of the player
+    private void move(Creature r, int x, int y, int speed) {  //changes the position of the player
         if ((x == 0 && y == 0) || !r.active) {
             return;
         }
@@ -70,7 +75,7 @@ public class Physics {
         r.reloc(r.x, r.y);
     }
 
-    public void react(Creature r, int x, int y) {
+    private void react(Creature r, int x, int y) {
         if ((x == 0 && y == 0) || !r.active) {
             return;
         }
@@ -81,12 +86,12 @@ public class Physics {
         r.reloc(r.x, r.y);
     }
 
-    public void ItemPicked() {
+    private void ItemPicked() {
         for (Item i : Game.level.items) {
-            if (i.intersects(Game.level.player) && !i.taken) {
+            if (i.intersects(Game.level.player) && !i.taken && Game.level.player.inventory.size() < 5) {
                 i.taken = true;
                 Game.level.player.inventory.add(i);
-                Game.new_log.writeToLog("Item is picked", "INFO");
+                Game.new_log.writeToLog("Item "+ i.name +" is picked", "INFO");
             }
         }
 

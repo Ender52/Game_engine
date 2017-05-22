@@ -1,4 +1,4 @@
-package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects;
+package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids;
 
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.Game;
 
@@ -12,6 +12,18 @@ public class Creature extends Solid {
     public String name = "Creature";
     public boolean alive;
 
+    /**
+     * <p>The construction of the creature</p>
+     *
+     * @param x      The X coordinate of the creature
+     * @param y      The Y coordinate of the creature
+     * @param width  The width of the creature
+     * @param height The height of the creature
+     * @param speed  The speed of the creature
+     * @param active Tells if the creature will prevent another creature to go through it
+     * @param weight The weight of the creature
+     * @param health The health of the creature
+     */
     public Creature(int x, int y, int width, int height, int speed, boolean active, int weight, int health) {
         alive = true;
         this.x = x;
@@ -28,6 +40,13 @@ public class Creature extends Solid {
         sencorL = new Rectangle(this.x, this.y, this.width / 4, this.height);
     }
 
+    /**
+     * <p>Relocate the creature</p>
+     *
+     * @param x The X coordinate, which tells for how much the creature will be relocated
+     * @param y The Y coordinate, which tells for how much the creature will be relocated
+     */
+
     public void reloc(int x, int y) {
         this.x = x;
         sencorT.x = x;
@@ -41,7 +60,13 @@ public class Creature extends Solid {
         sencorL.y = y;
     }
 
-    public void gotHit(int dmg) {
+    /**
+     * <p>Damage the creature</p>
+     *
+     * @param dmg The amount of damage the creature will get
+     */
+
+    void gotHit(int dmg) {
         if (health > 1) {
             System.out.println(name + ": Ouch! -" + dmg);
             health -= dmg;
@@ -51,7 +76,7 @@ public class Creature extends Solid {
         }
     }
 
-    public void die() {
+    private void die() {
         System.out.println("The creature " + name + " is dead now.");
         alive = false;
         Game.new_log.writeToLog("Creature " + name + " died", "INFO");

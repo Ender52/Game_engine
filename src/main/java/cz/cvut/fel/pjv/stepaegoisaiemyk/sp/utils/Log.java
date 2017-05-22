@@ -7,8 +7,8 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class Log {
-    public static Logger logger = null;
-    public static Log object = null;
+    private static Logger logger = null;
+    private static Log object = null;
     FileHandler fh;
 
     private Log() {
@@ -28,6 +28,11 @@ public class Log {
         }
     }
 
+    /**
+     * <p>Providing the one and only log object</p>
+     * <p>Creating log object, if none exists</p>
+     * @return log object
+     */
     public static Log getObject() {
         if (object == null) {
             object = new Log();
@@ -35,6 +40,13 @@ public class Log {
         return object;
     }
 
+    /**
+     * <p>Writing to the log</p>
+     * <p>There are three different modes to write the log
+     * "INFO" provides info messages
+     * "WARNING" provides warning messages
+     * "SEVERE" provides error messages</p>
+     */
     public static void writeToLog(String msg, String lvl) {
         object.logger.setLevel(Level.ALL);
         if (lvl == "INFO") {

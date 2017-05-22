@@ -1,18 +1,18 @@
 package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.graphics;
 
 import java.awt.Graphics;
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.*;
-import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.*;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Item;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Creature;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Obstacle;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.*;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.Buttons.IngameButton;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -61,8 +61,11 @@ public class Renderer extends JPanel {
 
         //items
         for (Item i : Game.level.items) {
-            g.setColor(i.color);
-            g.fillRect(windowX + i.x, windowY + i.y, i.width, i.height);
+            if (!i.taken) {
+                g.setColor(i.color);
+                g.fillRect(windowX + i.x, windowY + i.y, i.width, i.height);
+            }
+
         }
 
         for (Obstacle r : Game.level.obstacles) {
@@ -94,7 +97,7 @@ public class Renderer extends JPanel {
         /**/
     }
 
-    public void menuRender(IngameMenu m, Graphics g) {
+    private void menuRender(IngameMenu m, Graphics g) {
         g.setColor(m.color);
         g.fillRect(m.x, m.y, m.width, m.height);
         for (IngameButton b : m.buttons) {
@@ -111,4 +114,13 @@ public class Renderer extends JPanel {
             g.drawString(b.name, b.fontX, b.fontY);
         }
     }
+
+    /*public void drawItem(Graphics g, Item i, Item i2){
+        int ix = i2.x;
+        int iy = i2.y;
+        int iwidth = i2.width;
+        int iheight = i2.height;
+        g.setColor(i.color);
+        g.fillRect(windowX + ix, windowY + iy, iwidth, iheight);
+    }*/
 }

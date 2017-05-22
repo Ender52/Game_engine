@@ -1,4 +1,4 @@
-package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects;
+package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids;
 
 import java.awt.Rectangle;
 

@@ -1,4 +1,4 @@
-package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus;
+package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.Buttons;
 
 
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.Game;
@@ -13,6 +13,14 @@ public class IngameButton extends Rectangle {
     public String name;
     public int fontX, fontY, positionInList;
 
+    /**
+     * <p>The construction of the ingame button</p>
+     *
+     * @param s   The name of the button
+     * @param x   The X coordinate of the button
+     * @param y   The Y coordinate of the button
+     * @param pos The position of the button in the menu
+     */
     public IngameButton(String s, int x, int y, int pos) {
         super(x, y, Game.WIDTH - x * 2, 50);
         fontX = x + 35;
@@ -21,6 +29,9 @@ public class IngameButton extends Rectangle {
         positionInList = pos;
     }
 
+    /**
+     * <p>The action that this button will do</p>
+     */
     public void selectAction() {
         System.out.println("None");
     }

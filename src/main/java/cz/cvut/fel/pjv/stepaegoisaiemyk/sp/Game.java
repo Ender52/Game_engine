@@ -28,6 +28,9 @@ public class Game implements KeyListener, ActionListener {
 
     public static Log new_log;
 
+    /**
+     * <p>The construction of the game</p>
+     */
     public Game() {
         frame = new JFrame();  //the window itself
         /*window mode*//**/
@@ -65,6 +68,9 @@ public class Game implements KeyListener, ActionListener {
     public void keyTyped(KeyEvent e) {
     }
 
+    /**
+     * <p>The key was pressed</p>
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_W) {  //up
@@ -99,6 +105,9 @@ public class Game implements KeyListener, ActionListener {
         }
     }
 
+    /**
+     * <p>The key was released</p>
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_W) {  //up
@@ -121,6 +130,10 @@ public class Game implements KeyListener, ActionListener {
         }
     }
 
+    /**
+     * <p>The action was performed</p>
+     * <p>The action happens every time tick of the clock on OS</p>
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         physics.run();

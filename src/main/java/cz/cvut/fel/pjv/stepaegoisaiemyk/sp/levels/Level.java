@@ -1,9 +1,12 @@
 package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.levels;
 
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.*;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Item;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Creature;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Obstacle;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Player;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.physics.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.*;
-import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.*;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -24,6 +27,9 @@ public class Level {
     public boolean pause = true;
     IngameMenu menu;
 
+    /**
+     * <p>The construction of the level</p>
+     */
     public Level() {  //constructor
         color = Color.DARK_GRAY;
         physics = new Physics();
@@ -37,6 +43,9 @@ public class Level {
         menus = new ArrayList<>();  //menus
     }
 
+    /**
+     * <p>The key "W" was pressed</p>
+     */
     public void wPressed() {
         if (!pause) {
             player.speedY = -player.speed;
@@ -45,6 +54,9 @@ public class Level {
         }
     }
 
+    /**
+     * <p>The key "S" was pressed</p>
+     */
     public void sPressed() {
         if (!pause) {
             player.speedY = player.speed;
@@ -53,68 +65,107 @@ public class Level {
         }
     }
 
+    /**
+     * <p>The key "A" was pressed</p>
+     */
     public void aPressed() {
         if (!pause) {
             player.speedX = -player.speed;
         }
     }
 
+    /**
+     * <p>The key "D" was pressed</p>
+     */
     public void dPressed() {
         if (!pause) {
             player.speedX = player.speed;
         }
     }
 
+    /**
+     * <p>The key "ESC" was pressed</p>
+     */
     public void escPressed() {
         pause = !pause;
         pause();
     }
 
+    /**
+     * <p>The key "I" was pressed</p>
+     */
     public void iPressed() {
         pause = !pause;
         openInventory();
     }
 
+    /**
+     * <p>The key "ENTER" was pressed</p>
+     */
     public void enterPressed() {
         if (pause) {
             menu.select();
         }
     }
 
+    /**
+     * <p>The key "SPACE" was pressed</p>
+     */
     public void spacePressed() {
         if (!pause) {
             player.charging();
         }
     }
 
+    /**
+     * <p>The key "F" was pressed</p>
+     */
     public void fPressed() {
         player.openDoor();
     }
 
+    /**
+     * <p>The key "E" was pressed</p>
+     */
     public void ePressed() {
         player.grapplingHookShoot();
     }
 
+    /**
+     * <p>The key "W" was released</p>
+     */
     public void wReleased() {
         if (!pause)
             player.speedY = 0;
     }
 
+    /**
+     * <p>The key "S" was released</p>
+     */
     public void sReleased() {
         if (!pause)
             player.speedY = 0;
     }
 
+    /**
+     * <p>The key "A" was released</p>
+     */
     public void aReleased() {
         if (!pause)
             player.speedX = 0;
     }
 
+    /**
+     * <p>The key "D" was released</p>
+     */
     public void dReleased() {
         if (!pause)
             player.speedX = 0;
     }
 
+    /**
+     * <p>The key "SPACE" was released</p>
+     */
     public void spaceReleased() {
         if (!pause) {
             if (player.charge > 5 && player.speedX == 0 && player.speedY == 0) {
@@ -126,10 +177,17 @@ public class Level {
         }
     }
 
+    /**
+     * <p>The key "E" was released</p>
+     */
     public void eReleased() {
         player.grapplingHookTerm();
     }
 
+    /**
+     * <p>Removing dead objects</p>
+     * <p>Removing taken keys, dead creatures, opened doors</p>
+     */
     public void removeDead() {
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).taken == true) {
@@ -148,11 +206,17 @@ public class Level {
         }
     }
 
+    /**
+     * <p>TBD</p>
+     */
     public void levelLogic() {
         pause();
     }
 
-    public void openInventory() {
+    /**
+     * <p>Openning inventory</p>
+     */
+    private void openInventory() {
         if (pause) {
             menu = new InventoryMenu(100, 100, WIDTH - 200, 330);
             menus.add(menu);
@@ -179,7 +243,7 @@ public class Level {
 
     public void pause() {
         if (pause) {
-            menu = new MainMenu(300, 100, WIDTH - 600, HEIGHT - 200);
+            menu = new PauseMenu(300, 100, WIDTH - 600, HEIGHT - 200);
             menus.add(menu);
         } else {
             menus.remove(menu);
