@@ -15,7 +15,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.Timer;
 
-
+/**
+ * <p>The main class that contains the JFrame and all the logical and graphical representation of the game</p>
+ * 
+ */
 public class Game implements KeyListener, ActionListener {
     public static int WIDTH = 800, HEIGHT = 600;
     public static
@@ -56,7 +59,7 @@ public class Game implements KeyListener, ActionListener {
         frame.setVisible(true);
         frame.add(renderer);
 
-        level = new LevelOne();
+        level = new MainMenuLevel();  //setting the game to start from the main menu
         time = 0;
         timer.start();
 

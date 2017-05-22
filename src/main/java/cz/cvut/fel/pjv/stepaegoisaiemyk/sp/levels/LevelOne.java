@@ -1,5 +1,6 @@
 package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.levels;
 
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.Game;
 import java.awt.Color;
 
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Key;
@@ -41,7 +42,7 @@ public class LevelOne extends Level {
         items.add(new Key(350, 350, 15, 15, false, false));
 
 
-        //Game.level.player.inventory.add(new Key(true, false));
+        player.inventory.add(new Key(1,1,1,1,true, false));
 
         //items.add(new Key(WIDTH/2-20, HEIGHT/2-20, 15, 15, false, false)); //was trying to add item before loading level, need help
 

@@ -16,7 +16,7 @@ public class MainMenu extends IngameMenu {
     public MainMenu(int x, int y, int width, int height) {
         super(x, y, width, height);
         buttons.add(new LevelOneStartButton("New game", x + 15, y + 15, 0));
-        buttons.add(new ExitButton("Exit", x + 15, Game.HEIGHT - 2 * y + 30, 1));
+        buttons.add(new ExitButton("Exit", 15, Game.HEIGHT - 65, 1));
         size = buttons.size();
     }
 

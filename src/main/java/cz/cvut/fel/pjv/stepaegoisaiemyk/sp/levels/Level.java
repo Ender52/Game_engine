@@ -171,7 +171,7 @@ public class Level {
             if (player.charge > 10 && player.speedX == 0 && player.speedY == 0) {
                 player.heavyAttack();
             } else {
-                player.simpleAttack();
+                player.simpleAttack(player.damage);
             }
             player.charge = 0;
         }
@@ -210,7 +210,7 @@ public class Level {
      * <p>TBD</p>
      */
     public void levelLogic() {
-        pause();
+        //pause();
     }
 
     /**

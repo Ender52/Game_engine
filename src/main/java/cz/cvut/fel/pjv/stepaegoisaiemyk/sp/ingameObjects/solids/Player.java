@@ -7,12 +7,13 @@ import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Item;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Key;
 
+/**
+ * The class responsible for logical and graphical representation of the player in the game </p>
+ * 
+ */
 public class Player extends Creature {
-    public ArrayList<Rectangle> simpleAttackRanges;
     public ArrayList<Item> inventory;
-    public int range = 20;
     public int charge = 0;
-    public int direction;
     public Rectangle grapplingHook = null;
 
     /**
@@ -30,32 +31,9 @@ public class Player extends Creature {
 
     public Player(int x, int y, int width, int height, int speed, boolean active, int weight, int health) {
         super(x, y, width, height, speed, active, weight, health);
-        direction = 0;                      //0 - top, 1 - right, 2 - bottom, 3 - left
-        simpleAttackRanges = new ArrayList<>();
-        simpleAttackRanges.add(new Rectangle(x, y - range, width, range));
-        simpleAttackRanges.add(new Rectangle(x + width, y, range, height));
-        simpleAttackRanges.add(new Rectangle(x, y + height, width, range));
-        simpleAttackRanges.add(new Rectangle(x - range, y, range, height));
-
         inventory = new ArrayList<>(); //inventory
         name = "Player";
-    }
-
-    /**
-     * <p>Simple attack</p>
-     * <p>This type of attack will deal 10 damage</p>
-     */
-    public void simpleAttack() {
-        System.out.println("Simple attack!");
-        for (Creature c : Game.level.creatures) {
-            if (c == Game.level.player) {
-                continue;
-            }
-            if (c.alive && simpleAttackRanges.get(direction).intersects(c)) {
-                System.out.println("Gotcha!");
-                c.gotHit(10);
-            }
-        }
+        damage = 10;
     }
 
     /**
@@ -92,7 +70,7 @@ public class Player extends Creature {
 
     /**
      * <p>Shooting the grappling hook</p>
-     * <p>TBD</p>
+     * 
      */
     public void grapplingHookShoot() {
         if (grapplingHook == null) {
@@ -110,8 +88,8 @@ public class Player extends Creature {
     }
 
     /**
-     * <p>TBD</p>
-     * <p>TBD</p>
+     * <p>Grappling hook termination</p>
+     * 
      */
     public void grapplingHookTerm() {
         grapplingHook = null;
