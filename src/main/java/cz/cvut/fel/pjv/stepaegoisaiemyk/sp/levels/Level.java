@@ -302,7 +302,7 @@ public class Level {
                 player.inventory.add(new Key(1, 1, 15, 15, true, false));
             }
             if (str.charAt(i) == '2') {
-                //it will be another item
+                //there will be another item
             }
         }
 
