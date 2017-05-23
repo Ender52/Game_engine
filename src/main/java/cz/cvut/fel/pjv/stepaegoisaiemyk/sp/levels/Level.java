@@ -104,7 +104,7 @@ public class Level {
         openInventory();
     }
 
-    public void rPressed(){
+    public void rPressed() {
         dropItem();
     }
 
@@ -246,8 +246,8 @@ public class Level {
             if (i.equiped == true) {
                 i.taken = false;
                 i.equiped = false;
-                i.x = player.x+100;
-                i.y = player.y+100;
+                //i.x = player.simpleAttackRanges.get(player.direction).x;
+                //i.y = player.simpleAttackRanges.get(player.direction).y;
                 items.add(i);
                 Game.new_log.writeToLog("Item " + i.name + " is dropped", "INFO");
             }
@@ -289,19 +289,21 @@ public class Level {
     }
 
     public void loadInventory(String s) {               //under construction
+        String str = "";
         try {
             Scanner sc = new Scanner(new FileInputStream(s), "UTF-8");
-            if (sc.nextInt() == 1) {
-                player.inventory.add(new Key(1, 1, 15, 15, true, false));
-            } else if (sc.nextInt() == 2) {
-                //
-            } else if (sc.next() == " ") {
-                // continue;
-            } else if (sc.next() == "a") {
-                //break;
-            }
+            str = sc.nextLine();
         } catch (IOException e1) {
             Game.new_log.writeToLog("IOException", "SEVERE");
+        }
+
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == '1') {
+                player.inventory.add(new Key(1, 1, 15, 15, true, false));
+            }
+            if (str.charAt(i) == '2') {
+                //
+            }
         }
 
     }

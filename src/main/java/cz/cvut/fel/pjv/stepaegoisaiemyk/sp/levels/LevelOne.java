@@ -42,7 +42,7 @@ public class LevelOne extends Level {
         items.add(new Key(550, 550, 15, 15, false, false));
         items.add(new Key(350, 350, 15, 15, false, false));
 
-        loadInventory("D:\\Egor's\\Informatika\\Java\\SW\\stepaego\\src\\main\\java\\inventory.txt");
+        loadInventory("./src/main/resources/inventory.txt");
 
 
         //player.inventory.add(new Key(1,1,1,1,true, false));
