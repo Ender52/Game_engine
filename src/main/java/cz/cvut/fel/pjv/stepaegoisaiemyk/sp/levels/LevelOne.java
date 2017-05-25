@@ -18,7 +18,7 @@ public class LevelOne extends Level {
         pause = false;
 
         color = Color.getHSBColor(0.66f, 0.4f, 0.5f);
-        player = new Player(WIDTH / 2 - 20, HEIGHT / 2 - 20, 40, 40, 3, true, 10, 100);
+        player = new Player(WIDTH / 2 - 20, HEIGHT / 2 - 20, 40, 40, 4, true, 10, 100);
 
         creatures.add(player);
         creatures.add(new Creature(300, 300, 15, 15, 1, true, 3, 50, "/sprites/player"));

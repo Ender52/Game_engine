@@ -14,7 +14,7 @@ public class ItemRenderer extends ObjectRenderer{
     ImageLoader il;
     
     public ItemRenderer(String path){
-        il = new ImageLoader(path + "icon.png");
+        il = new ImageLoader(path + "icon.png", 0);
     }
 
     @Override

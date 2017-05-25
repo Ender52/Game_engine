@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 public class Creature extends Solid {
     public ArrayList<Rectangle> simpleAttackRanges;
-    public int speed, speedX, speedY, health, damage, range = 10, direction;
+    public int speed, speedX, speedY, health, damage, range = 10, direction, animation, frame;
     public Rectangle sencorT, sencorB, sencorR, sencorL;
     public Color color = Color.white;
     public String name = "Creature", path = "/sprites/player";
@@ -148,17 +148,23 @@ public class Creature extends Solid {
     
 
     private void checkDirection() {
+        animation = 0;
+        frame = Game.level.time % 50;
         if (speedX < 0) {
             direction = 3;
+            animation = 1;
         }
         if (speedX > 0) {
             direction = 1;
+            animation = 1;
         }
         if (speedY < 0) {
             direction = 0;
+            animation = 1;
         }
         if (speedY > 0) {
             direction = 2;
+            animation = 1;
         }
     }
 

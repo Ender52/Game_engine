@@ -16,9 +16,9 @@ public class DoorRenderer extends ObstacleRenderer{
     @Override
     public void paintObject(IngameObject io, Graphics g, ImageObserver o) {
         g.setColor(Color.red);
-        g.fillRect(io.x + Game.renderer.windowX, io.y - 60 + Game.renderer.windowY, io.width, io.height);
+        g.fillRect(io.x + Game.renderer.windowX, io.y - h + Game.renderer.windowY, io.width, io.height);
         g.setColor(Color.red.darker());
-        g.fillRect(io.x + Game.renderer.windowX, io.y + io.height - 60 + Game.renderer.windowY, io.width, 60);
+        g.fillRect(io.x + Game.renderer.windowX, io.y + io.height - h + Game.renderer.windowY, io.width, h);
     }
     
     

@@ -31,17 +31,6 @@ import java.util.Comparator;
 public class Renderer extends JPanel {
     public int windowX, windowY, realtime = 0, framecount = 0, fps = 0;
 
-    /*private BufferedImage playerImage;                            //this is for the drawing images
-    private BufferedImage playerImage2;*/
-
-    /*public Renderer(){
-        try {
-            playerImage = ImageIO.read(getClass().getResourceAsStream("/arachnik.gif"));
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-    }*/
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -55,7 +44,7 @@ public class Renderer extends JPanel {
         }
         ArrayList<IngameObject> sceneObjects = new ArrayList<>();
         sceneObjects.addAll(Game.level.creatures);
-        //sceneObjects.addAll(Game.level.items);
+        sceneObjects.addAll(Game.level.items);
         sceneObjects.addAll(Game.level.obstacles);
         //background
         g.setColor(Game.level.color.darker());
@@ -71,36 +60,6 @@ public class Renderer extends JPanel {
         for(IngameObject io : sceneObjects){
             io.or.paintObject(io, g, this);
         }
-
-        //testing
-        /*if (Game.level.player != null) {
-            g.setColor(Color.red);
-            Rectangle rect = Game.level.player.simpleAttackRanges.get(Game.level.player.direction);
-            g.fillRect(windowX + rect.x, windowY + rect.y, rect.width, rect.height);
-        }*/
-        //middleground
-        /*for (Creature c : Game.level.creatures) {
-            if(c == Game.level.player){
-                Game.level.player.cr.paintObject(c, g, this);
-                continue;
-            }
-            g.setColor(c.color);
-            g.fillRect(windowX + c.x, windowY + c.y, c.width, c.height);
-        }*/
-
-        //items
-        for (Item i : Game.level.items) {
-            if (!i.taken) {
-                g.setColor(i.color);
-                g.fillRect(windowX + i.x, windowY + i.y, i.width, i.height);
-            }
-
-        }
-
-        /*for (Obstacle r : Game.level.obstacles) {
-            g.setColor(r.color);
-            g.fillRect(windowX + r.x, windowY + r.y, r.width, r.height);
-        }*/
 
         //UI
         for (IngameMenu m : Game.level.menus) {

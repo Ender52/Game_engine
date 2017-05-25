@@ -14,10 +14,11 @@ import java.util.logging.Logger;
 public class ObstacleRenderer extends ObjectRenderer{
     BufferedImage top, side;
     ImageLoader ilTop, ilSide;
+    int h = 160;
     
     public ObstacleRenderer(String path) throws IOException, InterruptedException{
-        /*ImageLoader ilTop = new ImageLoader(path + "top.png");
-        ImageLoader ilSide = new ImageLoader(path + "side.png");
+        /*ImageLoader ilTop = new ImageLoader(path + "top.png", 0);
+        ImageLoader ilSide = new ImageLoader(path + "side.png", 0);
         ilTop.join();
         ilSide.join();
         top = ilTop.image;
@@ -45,9 +46,9 @@ public class ObstacleRenderer extends ObjectRenderer{
         g.drawImage(top, io.x, io.y - 60, io.width, io.height, o);
         g.drawImage(side, io.x, io.y + io.height - 60, io.width, 60, o);*/
         g.setColor(Color.white);
-        g.fillRect(io.x + Game.renderer.windowX, io.y - 60 + Game.renderer.windowY, io.width, io.height);
+        g.fillRect(io.x + Game.renderer.windowX, io.y - h + Game.renderer.windowY, io.width, io.height);
         g.setColor(Color.GRAY);
-        g.fillRect(io.x + Game.renderer.windowX, io.y + io.height - 60 + Game.renderer.windowY, io.width, 60);
+        g.fillRect(io.x + Game.renderer.windowX, io.y + io.height - h + Game.renderer.windowY, io.width, h);
     }
     
 }

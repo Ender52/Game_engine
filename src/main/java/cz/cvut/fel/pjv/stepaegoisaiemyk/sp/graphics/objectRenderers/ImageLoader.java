@@ -10,9 +10,11 @@ import javax.imageio.ImageIO;
 public class ImageLoader extends Thread{
     private String path;
     public BufferedImage image;
+    public int index;
     
-    public ImageLoader(String path){
+    public ImageLoader(String path, int indexX){
         this.path = path;
+        this.index = indexX;
     }
     
     @Override
