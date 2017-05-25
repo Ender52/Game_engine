@@ -4,9 +4,11 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.*;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.IngameObject;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Item;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Creature;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Obstacle;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Solid;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.Buttons.IngameButton;
 
@@ -14,7 +16,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * <p>The renderer class is responible for the graphical representation of all the elements in the game</p>
@@ -24,7 +29,7 @@ import java.util.Calendar;
  * <p>Also contains some testing constractions such as FPS counter</p>
  */
 public class Renderer extends JPanel {
-    int windowX, windowY, realtime = 0, framecount = 0, fps = 0;
+    public int windowX, windowY, realtime = 0, framecount = 0, fps = 0;
 
     /*private BufferedImage playerImage;                            //this is for the drawing images
     private BufferedImage playerImage2;*/
@@ -48,22 +53,40 @@ public class Renderer extends JPanel {
             windowX = -Game.level.player.x + (Game.WIDTH / 2 - 20);
             windowY = -Game.level.player.y + (Game.HEIGHT / 2 - 20);
         }
+        ArrayList<IngameObject> sceneObjects = new ArrayList<>();
+        sceneObjects.addAll(Game.level.creatures);
+        //sceneObjects.addAll(Game.level.items);
+        sceneObjects.addAll(Game.level.obstacles);
         //background
-        g.setColor(Game.level.color);
+        g.setColor(Game.level.color.darker());
         g.fillRect((int) (windowX), (int) (windowY), Game.WIDTH, Game.HEIGHT);
+        
+        Collections.sort(sceneObjects, new Comparator<IngameObject>(){
+            @Override
+            public int compare(IngameObject o1, IngameObject o2) {
+                return (o1.y + o1.height) - (o2.y+o2.height);
+            }
+        });
+        
+        for(IngameObject io : sceneObjects){
+            io.or.paintObject(io, g, this);
+        }
 
         //testing
-        if (Game.level.player != null) {
+        /*if (Game.level.player != null) {
             g.setColor(Color.red);
             Rectangle rect = Game.level.player.simpleAttackRanges.get(Game.level.player.direction);
             g.fillRect(windowX + rect.x, windowY + rect.y, rect.width, rect.height);
-        }
+        }*/
         //middleground
-        for (Creature c : Game.level.creatures) {
+        /*for (Creature c : Game.level.creatures) {
+            if(c == Game.level.player){
+                Game.level.player.cr.paintObject(c, g, this);
+                continue;
+            }
             g.setColor(c.color);
             g.fillRect(windowX + c.x, windowY + c.y, c.width, c.height);
-            //g.drawImage(playerImage,windowX + c.x, windowY + c.y, c.width, c.height, null);
-        }
+        }*/
 
         //items
         for (Item i : Game.level.items) {
@@ -74,10 +97,10 @@ public class Renderer extends JPanel {
 
         }
 
-        for (Obstacle r : Game.level.obstacles) {
+        /*for (Obstacle r : Game.level.obstacles) {
             g.setColor(r.color);
             g.fillRect(windowX + r.x, windowY + r.y, r.width, r.height);
-        }
+        }*/
 
         //UI
         for (IngameMenu m : Game.level.menus) {

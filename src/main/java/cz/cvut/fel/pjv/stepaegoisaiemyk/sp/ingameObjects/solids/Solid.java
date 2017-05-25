@@ -1,8 +1,8 @@
 package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids;
 
-import java.awt.Rectangle;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.IngameObject;
 
-public class Solid extends Rectangle {
+public class Solid extends IngameObject {
     public boolean active = true;
     public int weight;
 }

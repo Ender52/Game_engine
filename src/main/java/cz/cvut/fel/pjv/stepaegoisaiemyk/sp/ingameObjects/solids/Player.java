@@ -4,8 +4,12 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.*;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.graphics.objectRenderers.CreatureRenderer;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Item;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Key;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The class responsible for logical and graphical representation of the player in the game </p>
@@ -29,9 +33,17 @@ public class Player extends Creature {
      */
 
     public Player(int x, int y, int width, int height, int speed, boolean active, int weight, int health) {
-        super(x, y, width, height, speed, active, weight, health);
+        super(x, y, width, height, speed, active, weight, health, "/sprites/player");
         inventory = new ArrayList<>(); //inventory
         name = "Player";
+        /*path = "/sprites/player";
+        try{
+            cr = new CreatureRenderer(path);
+        }catch (IOException e){
+            System.out.println("The sprites weren't loaded...");
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
         damage = 10;
     }
 

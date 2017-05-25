@@ -1,18 +1,21 @@
 package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids;
 
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.Game;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.graphics.objectRenderers.CreatureRenderer;
 
 import java.awt.Color;
 import java.awt.Rectangle;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Creature extends Solid {
     public ArrayList<Rectangle> simpleAttackRanges;
-    public int speed, speedX, speedY, health, damage, range = 10;
-    public int direction;
+    public int speed, speedX, speedY, health, damage, range = 10, direction;
     public Rectangle sencorT, sencorB, sencorR, sencorL;
     public Color color = Color.white;
-    public String name = "Creature";
+    public String name = "Creature", path = "/sprites/player";
     public boolean alive;
 
     /**
@@ -26,8 +29,9 @@ public class Creature extends Solid {
      * @param active Tells if the creature will prevent another creature to go through it
      * @param weight The weight of the creature
      * @param health The health of the creature
+     * @param path
      */
-    public Creature(int x, int y, int width, int height, int speed, boolean active, int weight, int health) {
+    public Creature(int x, int y, int width, int height, int speed, boolean active, int weight, int health, String path) {
         alive = true;
         this.x = x;
         this.y = y;
@@ -48,6 +52,13 @@ public class Creature extends Solid {
         simpleAttackRanges.add(new Rectangle(x + width, y, range, height));
         simpleAttackRanges.add(new Rectangle(x, y + height, width, range));
         simpleAttackRanges.add(new Rectangle(x - range, y, range, height));
+        try {
+            or = new CreatureRenderer(path);
+        } catch (IOException ex) {
+            Logger.getLogger(Creature.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Creature.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -81,6 +92,8 @@ public class Creature extends Solid {
         simpleAttackRanges.get(1).y = y;
         simpleAttackRanges.get(2).y = y + height;
         simpleAttackRanges.get(3).y = y;
+        
+        checkDirection();
     }
 
     /**
@@ -117,7 +130,8 @@ public class Creature extends Solid {
 
     /**
      * <p>Simple attack</p>
-     * <p>This type of attack will deal 10 damage</p>
+     * <p>This type of attack will deal damage defined by:</p>
+     * @param dmg amount of damage
      */
     public void simpleAttack(int dmg) {
         System.out.println("Simple attack!");
@@ -129,6 +143,22 @@ public class Creature extends Solid {
                 System.out.println("Gotcha!");
                 c.gotHit(dmg);
             }
+        }
+    }
+    
+
+    private void checkDirection() {
+        if (speedX < 0) {
+            direction = 3;
+        }
+        if (speedX > 0) {
+            direction = 1;
+        }
+        if (speedY < 0) {
+            direction = 0;
+        }
+        if (speedY > 0) {
+            direction = 2;
         }
     }
 

@@ -42,7 +42,6 @@ public class Physics {
             react(c, x, y);
         }
         ItemPicked();
-        Game.level.checkDirection();
     }
 
 

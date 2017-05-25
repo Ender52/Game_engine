@@ -48,7 +48,8 @@ public class Game implements KeyListener, ActionListener {
         WIDTH = (int)resolution.getWidth();
         HEIGHT = (int)resolution.getHeight();
         /**/
-
+        
+        level = new MainMenuLevel();  //setting the game to start from the main menu
         renderer = new Renderer();
         physics = new Physics();
         frame.addKeyListener(this);
@@ -57,7 +58,6 @@ public class Game implements KeyListener, ActionListener {
         frame.setVisible(true);
         frame.add(renderer);
 
-        level = new MainMenuLevel();  //setting the game to start from the main menu
         time = 0;
         timer.start();
 

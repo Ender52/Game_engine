@@ -256,25 +256,6 @@ public class Level {
     }
 
     /**
-     * <p>Checking direction</p>
-     * <p>The creature must look the same direction it moves</p>
-     */
-    public void checkDirection() {
-        if (player.speedX < 0) {
-            player.direction = 3;
-        }
-        if (player.speedX > 0) {
-            player.direction = 1;
-        }
-        if (player.speedY < 0) {
-            player.direction = 0;
-        }
-        if (player.speedY > 0) {
-            player.direction = 2;
-        }
-    }
-
-    /**
      * <p>Pausing the game</p>
      * <p>Opens pause menu</p>
      */
@@ -302,7 +283,7 @@ public class Level {
                 player.inventory.add(new Key(1, 1, 15, 15, true, false));
             }
             if (str.charAt(i) == '2') {
-                //there will be another item
+                //There will be another item here.
             }
         }
 

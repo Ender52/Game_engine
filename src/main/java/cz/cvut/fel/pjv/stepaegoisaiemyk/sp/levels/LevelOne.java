@@ -21,7 +21,7 @@ public class LevelOne extends Level {
         player = new Player(WIDTH / 2 - 20, HEIGHT / 2 - 20, 40, 40, 3, true, 10, 100);
 
         creatures.add(player);
-        creatures.add(new Creature(300, 300, 15, 15, 1, true, 3, 50));
+        creatures.add(new Creature(300, 300, 15, 15, 1, true, 3, 50, "/sprites/player"));
         creatures.get(1).speedX = 0;
 
         obstacles.add(new Obstacle(0, 0, 15, HEIGHT));              //left wall
@@ -31,9 +31,9 @@ public class LevelOne extends Level {
         obstacles.add(new Obstacle(200, 0, 15, 200));           //right obs
         obstacles.add(new Obstacle(300, 0, 15, 200));           //moving obs
         obstacles.add(new Obstacle(0, 185, 200, 15));           //bottom obs
-        obstacles.add(new Obstacle(WIDTH - 15, HEIGHT / 2 + 25, 15, HEIGHT / 2 - 25));  //right wall
+        obstacles.add(new Obstacle(WIDTH - 15, HEIGHT / 2 + 125, 15, HEIGHT / 2 - 125));  //right wall
 
-        obstacles.add(new Door(WIDTH - 15, HEIGHT / 2 - 25, 15, 50));
+        obstacles.add(new Door(WIDTH - 15, HEIGHT / 2 - 25, 15, 150));
 
 
         items.add(new Key(400, 400, 15, 15, false, false));
@@ -66,14 +66,6 @@ public class LevelOne extends Level {
             }
             wall.x += loop * 4;
         }
-
-        /*Creature c = creatures.get(1);
-        if(!c.alive){
-            return;
-        }
-        if(c.x > 500 || c.x < 100){
-            c.speedX *= -1;
-        }*/
     }
 
 }
