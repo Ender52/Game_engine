@@ -41,7 +41,7 @@ public class Physics {
             move(c, c.speedX, c.speedY, c.speed);
             react(c, x, y);
         }
-        ItemPicked();
+        Game.level.ItemPicked();
     }
 
 
@@ -87,15 +87,5 @@ public class Physics {
             r.y += y;
         }
         r.reloc(r.x, r.y);
-    }
-
-    private void ItemPicked() {
-        for (Item i : Game.level.items) {
-            if (i.intersects(Game.level.player) && !i.taken && Game.level.player.inventory.size() < 5) {
-                i.taken = true;
-                Game.level.player.inventory.add(i);
-                Game.new_log.writeToLog("Item " + i.name + " is picked", "INFO");
-            }
-        }
     }
 }

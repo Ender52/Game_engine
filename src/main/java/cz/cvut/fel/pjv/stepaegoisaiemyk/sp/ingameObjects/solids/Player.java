@@ -57,8 +57,9 @@ public class Player extends Creature {
     /**
      * <p>Heavy attack</p>
      * <p>This type of attack will deal 20 damage</p>
+     * @param dmg
      */
-    public void heavyAttack() {
+    public void heavyAttack(int dmg) {
         speedX = 0;
         speedY = 0;
         System.out.println("Heavy attack!");
@@ -68,7 +69,7 @@ public class Player extends Creature {
             }
             if (simpleAttackRanges.get(direction).intersects(c)) {
                 System.out.println("Gotcha!");
-                c.gotHit(20);
+                c.gotHit(dmg * 2);
             }
         }
     }
@@ -114,7 +115,7 @@ public class Player extends Creature {
         for (Obstacle o : Game.level.obstacles) {
             for (Item i : Game.level.player.inventory) {
                 if (o instanceof Door && i instanceof Key) {
-                    if (i.equiped == true && Game.level.pause == false) {
+                    if (i.equiped == true && Game.level.pause == false && o.intersects(simpleAttackRanges.get(direction))) {
                         ((Door) o).active = false;
                         System.out.println("Door opened");
                         Game.new_log.writeToLog("Door is opened", "INFO");

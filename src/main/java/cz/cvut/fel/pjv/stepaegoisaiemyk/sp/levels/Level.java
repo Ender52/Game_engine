@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import static cz.cvut.fel.pjv.stepaegoisaiemyk.sp.Game.new_log;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.DamageBuff;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.SpeedBuff;
 
 
 public class Level {
@@ -28,6 +30,7 @@ public class Level {
     public ArrayList<Item> items;
     int loop = 1;
     public int time = 0;
+    private long gameOverTime = -1;
     //public Timer timer;
     public boolean pause = true;
     IngameMenu menu;
@@ -92,20 +95,26 @@ public class Level {
      * <p>The key "ESC" was pressed</p>
      */
     public void escPressed() {
-        pause = !pause;
-        pause();
+        if(player!=null){
+            pause = !pause;
+            pause();
+        }
     }
 
     /**
      * <p>The key "I" was pressed</p>
      */
     public void iPressed() {
-        pause = !pause;
-        openInventory();
+        if(player!=null){
+            pause = !pause;
+            openInventory();
+        }
     }
 
     public void rPressed() {
-        dropItem();
+        if(player != null && !pause){
+            dropItem();
+        }
     }
 
     /**
@@ -130,14 +139,18 @@ public class Level {
      * <p>The key "F" was pressed</p>
      */
     public void fPressed() {
-        player.openDoor();
+        if(player!=null){
+            player.openDoor();
+        }
     }
 
     /**
      * <p>The key "E" was pressed</p>
      */
     public void ePressed() {
-        player.grapplingHookShoot();
+        if(player!=null){
+            player.grapplingHookShoot();
+        }
     }
 
     /**
@@ -178,7 +191,7 @@ public class Level {
     public void spaceReleased() {
         if (!pause) {
             if (player.charge > 10 && player.speedX == 0 && player.speedY == 0) {
-                player.heavyAttack();
+                player.heavyAttack(player.damage);
             } else {
                 player.simpleAttack(player.damage);
             }
@@ -190,7 +203,9 @@ public class Level {
      * <p>The key "E" was released</p>
      */
     public void eReleased() {
-        player.grapplingHookTerm();
+        if(player!=null){
+            player.grapplingHookTerm();
+        }
     }
 
     /**
@@ -244,15 +259,49 @@ public class Level {
     private void dropItem() {
         for (Item i : player.inventory) {
             if (i.equiped == true) {
+                if (i instanceof SpeedBuff) {
+                    player.speed -= 1;
+                }
+                if (i instanceof DamageBuff) {
+                    player.damage -= 5;
+                }
                 i.taken = false;
                 i.equiped = false;
-                //i.x = player.simpleAttackRanges.get(player.direction).x;
-                //i.y = player.simpleAttackRanges.get(player.direction).y;
+                int d = player.direction;                   //0 - top, 1 - right, 2 - bottom, 3 - left
+                int c = 50;
+                if (d == 0) {
+                    i.x = player.simpleAttackRanges.get(d).x + player.simpleAttackRanges.get(d).width / 2 - i.width / 2;
+                    i.y = player.simpleAttackRanges.get(d).y - c - i.height / 2;
+                } else if (d == 1) {
+                    i.x = player.simpleAttackRanges.get(d).x + player.simpleAttackRanges.get(d).width + c - i.width / 2;
+                    i.y = player.simpleAttackRanges.get(d).y + player.simpleAttackRanges.get(d).height / 2 - i.height / 2;
+                } else if (d == 2) {
+                    i.x = player.simpleAttackRanges.get(d).x + player.simpleAttackRanges.get(d).width / 2 - i.width / 2;
+                    i.y = player.simpleAttackRanges.get(d).y + player.simpleAttackRanges.get(d).height + c - i.height / 2;
+                } else if (d == 3) {
+                    i.x = player.simpleAttackRanges.get(d).x - c - i.width / 2;
+                    i.y = player.simpleAttackRanges.get(d).y + player.simpleAttackRanges.get(d).height / 2 - i.height / 2;
+                }
                 items.add(i);
                 Game.new_log.writeToLog("Item " + i.name + " is dropped", "INFO");
             }
         }
-
+    }
+    
+    public void ItemPicked() {
+        for (Item i : items) {
+            if (i.intersects(player) && !i.taken && player.inventory.size() < 5) {
+                if (i instanceof SpeedBuff) {
+                    player.speed += 1;
+                }
+                if (i instanceof DamageBuff) {
+                    player.damage += 5;
+                }
+                i.taken = true;
+                player.inventory.add(i);
+                Game.new_log.writeToLog("Item " + i.name + " is picked", "INFO");
+            }
+        }
     }
 
     /**
@@ -269,23 +318,68 @@ public class Level {
         }
     }
 
-    public void loadInventory(String s) {               //under construction
+    public void loadInventory(String s) {
         String str = "";
         try {
             Scanner sc = new Scanner(new FileInputStream(s), "UTF-8");
             str = sc.nextLine();
-        } catch (IOException e1) {
-            Game.new_log.writeToLog("IOException", "SEVERE");
+        } catch (IOException e) {
+            Game.new_log.writeToLog("Couldn't load inventory", "SEVERE");
         }
-
         for (int i = 0; i < str.length(); i++) {
             if (str.charAt(i) == '1') {
-                player.inventory.add(new Key(1, 1, 15, 15, true, false));
+                player.inventory.add(new Key(0, 0, 15, 15, true, false));
             }
             if (str.charAt(i) == '2') {
-                //There will be another item here.
+                player.inventory.add(new DamageBuff(0, 0, 15, 15, true, false));
+                player.damage += 5;
+            }
+            if (str.charAt(i) == '3') {
+                player.inventory.add(new SpeedBuff(0, 0, 15, 15, true, false));
+                player.speed += 1;
             }
         }
-
+        Game.new_log.writeToLog("Inventory successfully loaded", "INFO");
     }
+    
+    public void saveInventory(String s) {
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(s), "utf-8"))){
+            for (Item i : player.inventory) {
+                if (i instanceof Key) {
+                    writer.write("1");
+                }
+                if (i instanceof DamageBuff) {
+                    writer.write("2");
+                }
+                if (i instanceof SpeedBuff) {
+                    writer.write("3");
+                }
+            }
+        } catch (IOException e) {
+            Game.new_log.writeToLog("Couldn't save inventory", "SEVERE");
+        }
+        Game.new_log.writeToLog("Inventory successfully saved", "INFO");
+    }
+    
+        public void GameOver() {
+        if (player != null && creatures.size() == 1) {
+            if (gameOverTime == -1) {
+                gameOverTime = System.nanoTime();
+            } else if ((System.nanoTime() - gameOverTime) / 1000000000 > 3) {
+                if (creatures.get(0) instanceof Player) {
+                    saveInventory("./src/main/resources/SAVEDinventory.txt");
+                    //you win
+                    Game.new_log.writeToLog("Game is over", "INFO");
+                } else {
+                    saveInventory("./src/main/resources/SAVEDinventory.txt");
+                    //you lose
+                    Game.new_log.writeToLog("Game is over", "INFO");
+                }
+                Game.level = new MainMenuLevel();
+                //System.exit(0);
+            }
+        }
+    }
+
 }

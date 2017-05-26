@@ -122,7 +122,7 @@ public class Creature extends Solid {
     }
 
 
-    private void die() {
+    public void die() {
         System.out.println("The creature " + name + " is dead now.");
         alive = false;
         Game.new_log.writeToLog("Creature " + name + " died", "INFO");

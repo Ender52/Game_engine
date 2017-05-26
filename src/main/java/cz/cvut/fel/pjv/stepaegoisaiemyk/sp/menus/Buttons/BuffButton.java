@@ -1,10 +1,11 @@
 package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.Buttons;
 
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.Game;
-import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.*;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Item;
 
+import java.awt.*;
 
-public class KeyButton extends ItemButton {
+public class BuffButton extends ItemButton {
 
     /**
      * <p>The construction of the button for picking the key</p>
@@ -14,20 +15,20 @@ public class KeyButton extends ItemButton {
      * @param y   The Y coordinate of the button
      * @param pos The position of the button in the menu
      */
-    public KeyButton(String s, int x, int y, int pos) {
+    public BuffButton(String s, int x, int y, int pos) {
         super(s, x, y, pos);
     }
 
     /**
      * <p>The action that this button will do</p>
-     * <p>This will equip the key</p>
+     * <p>This will equip the buff</p>
      */
     @Override
     public void selectAction() {
-        for(Item i : Game.level.player.inventory){
+        for (Item i : Game.level.player.inventory){
             if (i.equiped == true){
-            i.equiped = false;
-            Game.new_log.writeToLog(i.name + " is uneqiped", "INFO");
+                i.equiped = false;
+                Game.new_log.writeToLog(i.name + " is unequiped", "INFO");
             }
         }
         Game.level.player.inventory.get(positionInList).equiped = true;

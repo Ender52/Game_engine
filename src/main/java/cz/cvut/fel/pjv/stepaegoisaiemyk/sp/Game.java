@@ -145,6 +145,7 @@ public class Game implements KeyListener, ActionListener {
         time++;
         level.time++;
         level.removeDead();
+        level.GameOver();
     }
 
 }
