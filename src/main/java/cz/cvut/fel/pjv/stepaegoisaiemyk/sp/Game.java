@@ -41,7 +41,7 @@ public class Game implements KeyListener, ActionListener {
         frame.setResizable(false);
         /**/
         
-        /*fullscreen mode*//*
+        /*fullscreen mode*//**/
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); //this will make game fullscreen
         frame.setUndecorated(true);
         Dimension resolution = Toolkit.getDefaultToolkit().getScreenSize();

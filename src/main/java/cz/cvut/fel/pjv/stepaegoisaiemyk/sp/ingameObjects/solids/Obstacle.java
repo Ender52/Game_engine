@@ -4,9 +4,10 @@ import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.Game;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.graphics.objectRenderers.ObstacleRenderer;
 import java.awt.Color;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+/**
+ * <p>A class that defines every wall or other immovable object on the level</p>
+ * 
+ */
 public class Obstacle extends Solid {
     public Color color = Color.LIGHT_GRAY;
     public String path = "/sprites/obstacles";

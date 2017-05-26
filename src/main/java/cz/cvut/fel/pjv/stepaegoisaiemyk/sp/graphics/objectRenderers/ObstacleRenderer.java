@@ -2,52 +2,31 @@ package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.graphics.objectRenderers;
 
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.Game;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.IngameObject;
-import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+/**
+ * <p>Renders an obstacle</p>
+ * 
+ * <p>Extends ObjectRenderer</p>
+ * 
+ */
 public class ObstacleRenderer extends ObjectRenderer{
     BufferedImage top, side;
     ImageLoader ilTop, ilSide;
-    int h = 160;
+    int h = 100;
     
     public ObstacleRenderer(String path) throws IOException, InterruptedException{
-        /*ImageLoader ilTop = new ImageLoader(path + "top.png", 0);
-        ImageLoader ilSide = new ImageLoader(path + "side.png", 0);
-        ilTop.join();
-        ilSide.join();
-        top = ilTop.image;
-        side = ilSide.image;*/
     }
     
     @Override
     public void paintObject(IngameObject io, Graphics g, ImageObserver o) {
-        /*if(top == null){
-            try {
-                ilTop.join();
-            } catch (InterruptedException ex) {
-                Logger.getLogger(ItemRenderer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            top = ilTop.image;
-        }
-        if(side == null){
-            try {
-                ilSide.join();
-            } catch (InterruptedException ex) {
-                Logger.getLogger(ItemRenderer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            side = ilSide.image;
-        }
-        g.drawImage(top, io.x, io.y - 60, io.width, io.height, o);
-        g.drawImage(side, io.x, io.y + io.height - 60, io.width, 60, o);*/
-        g.setColor(Color.white);
+
+        g.setColor(Color.getHSBColor(0.3f, 0.05f, 0.9f));
         g.fillRect(io.x + Game.renderer.windowX, io.y - h + Game.renderer.windowY, io.width, io.height);
-        g.setColor(Color.GRAY);
+        g.setColor(Color.getHSBColor(0.6f, 0.1f, 0.2f));
         g.fillRect(io.x + Game.renderer.windowX, io.y + io.height - h + Game.renderer.windowY, io.width, h);
     }
     

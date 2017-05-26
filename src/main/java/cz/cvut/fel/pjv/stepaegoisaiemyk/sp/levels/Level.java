@@ -20,7 +20,10 @@ import static cz.cvut.fel.pjv.stepaegoisaiemyk.sp.Game.new_log;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.DamageBuff;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.SpeedBuff;
 
-
+/**
+ * <p>One of the most important classes in the program, it keeps track of current logical state</p>
+ * 
+ */
 public class Level {
     final int HEIGHT = Game.HEIGHT, WIDTH = Game.WIDTH;  //variables changing size of the frame; used everywhere
     public Color color;
@@ -194,7 +197,7 @@ public class Level {
      */
     public void spaceReleased() {
         if (!pause) {
-            if (player.charge > 10 && player.speedX == 0 && player.speedY == 0) {
+            if (player.charge > 3 && player.speedX == 0 && player.speedY == 0) {
                 player.heavyAttack(player.damage);
             } else {
                 player.simpleAttack(player.damage);
@@ -367,7 +370,7 @@ public class Level {
     }
 
     public void GameOver() {
-        if (player != null && creatures.size() == 1) {
+        if (player != null && (creatures.size() == 1||!player.alive)) {
             if (gameOverTime == -1) {
                 gameOverTime = System.nanoTime();
             } else if ((System.nanoTime() - gameOverTime) / 1000000000 > 3) {
@@ -391,6 +394,9 @@ public class Level {
         try {
             Scanner sc = new Scanner(new FileInputStream(s), "UTF-8");
             while (!EOF) {
+                if(!sc.hasNextLine()){
+                    break;
+                }
                 str = sc.nextLine();
                 numbers = str.split(":");
                 if (numbers[0].equals("1")) {         //creatures

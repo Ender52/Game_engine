@@ -1,5 +1,4 @@
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.Game;
-import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Creature;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Player;
 
 import static org.junit.Assert.*;

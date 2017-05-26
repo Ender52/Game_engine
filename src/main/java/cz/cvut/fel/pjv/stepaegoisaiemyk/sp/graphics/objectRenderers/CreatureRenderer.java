@@ -6,20 +6,24 @@ import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.IngameObject;
 import java.awt.image.BufferedImage;
 
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Creature;
-import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Solid;
+import java.awt.Color;
 
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-
+/**
+ * <p>Renders a creature, static poses and animation</p>
+ * 
+ * <p>Extends ObjectRenderer</p>
+ * 
+ */
 public class CreatureRenderer extends ObjectRenderer {
     public BufferedImage[] standing, walkingFront, walkingRight, walkingBack, walkingLeft;
     BufferedImage shadow;
     BufferedImage[][] arr;
+    int counter = 0;
 
     /**
      * <p>The construction of creature renderer</p>
@@ -55,6 +59,15 @@ public class CreatureRenderer extends ObjectRenderer {
             i = standing[c.direction];
         } else {
             i = arr[c.direction][c.frame];
+        }
+        if(c.rangeVisible){
+            counter++;
+            g.setColor(Color.red);
+            g.fillRect(c.simpleAttackRanges.get(c.direction).x+ Game.renderer.windowX, c.simpleAttackRanges.get(c.direction).y+ Game.renderer.windowY, c.simpleAttackRanges.get(c.direction).width, c.simpleAttackRanges.get(c.direction).height);
+            if(counter > 15){
+                c.rangeVisible = false;
+                counter = 0;
+            }
         }
         g.drawImage(i, c.x + Game.renderer.windowX - (i.getWidth() - c.width) / 2, c.y + Game.renderer.windowY - (i.getHeight() - c.height) + 15, o);
     }

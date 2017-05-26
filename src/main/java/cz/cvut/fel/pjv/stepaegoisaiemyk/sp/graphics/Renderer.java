@@ -5,21 +5,21 @@ import javax.swing.JPanel;
 
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.IngameObject;
-import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Item;
-import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Creature;
-import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Obstacle;
-import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Solid;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.Buttons.IngameButton;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Rectangle;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import javax.imageio.ImageIO;
 
 /**
  * <p>The renderer class is responible for the graphical representation of all the elements in the game</p>
@@ -30,6 +30,7 @@ import java.util.Comparator;
  */
 public class Renderer extends JPanel {
     public int windowX, windowY, realtime = 0, framecount = 0, fps = 0;
+    BufferedImage background;
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -46,9 +47,25 @@ public class Renderer extends JPanel {
         sceneObjects.addAll(Game.level.creatures);
         sceneObjects.addAll(Game.level.items);
         sceneObjects.addAll(Game.level.obstacles);
-        //background
-        g.setColor(Game.level.color.darker());
-        g.fillRect((int) (windowX), (int) (windowY), Game.WIDTH, Game.HEIGHT);
+        if(Game.level.player != null && background == null){
+            System.out.println("Updating background");
+            try {
+                //background
+                BufferedImage before = ImageIO.read(getClass().getResourceAsStream("/background/map1_alpha.png"));
+                int w = before.getWidth();
+                int h = before.getHeight();
+                background = new BufferedImage(w * 3, h * 3, BufferedImage.TYPE_INT_ARGB);
+                AffineTransform at = new AffineTransform();
+                at.scale(3.0, 3.0);
+                AffineTransformOp scaleOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+                background = scaleOp.filter(before, background);
+            } catch (IOException ex) {
+                //Logger.getLogger(Renderer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if( background != null){
+            g.drawImage(background, windowX, windowY, background.getWidth(), background.getHeight(),this);
+        }
         
         Collections.sort(sceneObjects, new Comparator<IngameObject>(){
             @Override
@@ -60,11 +77,19 @@ public class Renderer extends JPanel {
         for(IngameObject io : sceneObjects){
             io.or.paintObject(io, g, this);
         }
+        if(Game.level.player != null){
+            g.setColor(Color.black);
+            g.fillRect(Game.WIDTH - 310, Game.HEIGHT - 25, 300, 15);
+            g.setColor(Color.red);
+            g.fillRect(Game.WIDTH - 308 + (100 - Game.level.player.health) * 3, Game.HEIGHT - 23, Game.level.player.health * 3 - 3, 11); 
+        }
 
         //UI
         for (IngameMenu m : Game.level.menus) {
             menuRender(m, g);
         }
+        
+        
         
         /* Monitoring FPS */
         framecount++;

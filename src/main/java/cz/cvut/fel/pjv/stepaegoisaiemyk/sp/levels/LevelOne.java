@@ -1,15 +1,14 @@
 package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.levels;
 
-import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.Game;
 
 import java.awt.Color;
 
-import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Key;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Creature;
-import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Door;
-import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Obstacle;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Player;
-
+/**
+ * <p>Extends Level class which is more abstract, works with txt files to generate a level</p>
+ * <p>The implementation of simple AI is also here</p>
+ */
 public class LevelOne extends Level {
     /**
      * <p>The construction of the level one</p>
@@ -18,7 +17,7 @@ public class LevelOne extends Level {
         pause = false;
 
         color = Color.getHSBColor(0.66f, 0.4f, 0.5f);
-        player = new Player(WIDTH / 2 - 20, HEIGHT / 2 - 20, 40, 40, 4, true, 10, 100);
+        player = new Player(1350, 1350, 40, 40, 4, true, 10, 100);
 
         creatures.add(player);
 
@@ -31,12 +30,21 @@ public class LevelOne extends Level {
      */
     @Override
     public void levelLogic() {
-        Obstacle wall = obstacles.get(5);
-        if (time % 4 == 0) {
-            if (wall.x + wall.width > WIDTH || wall.x < 200) {
-                loop *= -1;
+        for(Creature c : creatures){
+            if(c == player){
+                continue;
             }
-            wall.x += loop * 4;
+            if(Math.sqrt(Math.pow((c.x - player.x), 2) + Math.pow((c.y - player.y), 2)) < 150){
+                //System.out.println("TriGgeRrEdd!");
+                c.speedX = -c.speed * (int) Math.signum((c.x - player.x));
+                c.speedY = -c.speed * (int) Math.signum((c.y - player.y));
+                if(c.simpleAttackRanges.get(c.direction).intersects(player) && time % 40 == 0){
+                    c.simpleAttack(c.damage);
+                }
+            }else{
+                c.speedX = 0;
+                c.speedY = 0;
+            }
         }
     }
 }

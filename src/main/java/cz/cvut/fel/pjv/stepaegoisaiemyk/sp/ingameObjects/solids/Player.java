@@ -4,12 +4,8 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.*;
-import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.graphics.objectRenderers.CreatureRenderer;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Item;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Key;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The class responsible for logical and graphical representation of the player in the game </p>
@@ -62,6 +58,7 @@ public class Player extends Creature {
     public void heavyAttack(int dmg) {
         speedX = 0;
         speedY = 0;
+        rangeVisible = true;
         System.out.println("Heavy attack!");
         for (Creature c : Game.level.creatures) {
             if (c == Game.level.player || !c.alive) {

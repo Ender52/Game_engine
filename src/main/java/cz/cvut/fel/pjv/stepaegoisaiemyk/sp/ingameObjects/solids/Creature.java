@@ -7,16 +7,17 @@ import java.awt.Color;
 import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+/**
+ * <p>A class that defines a creature on the level</p>
+ * 
+ */
 public class Creature extends Solid {
     public ArrayList<Rectangle> simpleAttackRanges;
-    public int speed, speedX, speedY, health, damage, range = 10, direction, animation, frame;
+    public int speed, speedX, speedY, health, damage = 15, range = 50, direction, animation, frame;
     public Rectangle sencorT, sencorB, sencorR, sencorL;
     public Color color = Color.white;
     public String name = "Creature", path = "/sprites/player";
-    public boolean alive;
+    public boolean alive, rangeVisible;
 
     /**
      * <p>The construction of the creature</p>
@@ -135,8 +136,9 @@ public class Creature extends Solid {
      */
     public void simpleAttack(int dmg) {
         System.out.println("Simple attack!");
+        rangeVisible = true;
         for (Creature c : Game.level.creatures) {
-            if (c == Game.level.player) {
+            if (c == this) {
                 continue;
             }
             if (c.alive && simpleAttackRanges.get(direction).intersects(c)) {

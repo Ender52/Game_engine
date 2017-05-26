@@ -1,7 +1,11 @@
 package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items;
 
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.graphics.objectRenderers.ItemRenderer;
 import java.awt.*;
-
+/**
+ * <p>Key item extends Item contains some specific functionality of a key</p>
+ * 
+ */
 public class Key extends Item {
     /**
      * <p>The construction of the key</p>
@@ -22,5 +26,6 @@ public class Key extends Item {
         this.equiped = equiped;
         color = Color.yellow;
         name = "Key";
+        or =new ItemRenderer("");
     }
 }

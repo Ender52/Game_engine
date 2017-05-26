@@ -1,7 +1,6 @@
 package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.physics;
 
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.*;
-import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Item;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Creature;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Obstacle;
 
