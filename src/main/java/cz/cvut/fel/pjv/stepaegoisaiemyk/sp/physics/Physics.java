@@ -14,7 +14,6 @@ public class Physics {
 
     /**
      * <p>Initializing the physics</p>
-     * <p>TBD</p>
      */
     public void run() {
         if (Game.level.pause) {

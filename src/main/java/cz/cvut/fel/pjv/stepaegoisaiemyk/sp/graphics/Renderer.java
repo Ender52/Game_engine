@@ -47,7 +47,7 @@ public class Renderer extends JPanel {
         sceneObjects.addAll(Game.level.creatures);
         sceneObjects.addAll(Game.level.items);
         sceneObjects.addAll(Game.level.obstacles);
-        if(Game.level.player != null && background == null){
+        if (Game.level.player != null && background == null) {
             System.out.println("Updating background");
             try {
                 //background
@@ -60,36 +60,34 @@ public class Renderer extends JPanel {
                 AffineTransformOp scaleOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
                 background = scaleOp.filter(before, background);
             } catch (IOException ex) {
-                //Logger.getLogger(Renderer.class.getName()).log(Level.SEVERE, null, ex);
+                Game.new_log.writeToLog("Couldn't load background", "INFO");
             }
         }
-        if( background != null){
-            g.drawImage(background, windowX, windowY, background.getWidth(), background.getHeight(),this);
+        if (background != null) {
+            g.drawImage(background, windowX, windowY, background.getWidth(), background.getHeight(), this);
         }
-        
-        Collections.sort(sceneObjects, new Comparator<IngameObject>(){
+
+        Collections.sort(sceneObjects, new Comparator<IngameObject>() {
             @Override
             public int compare(IngameObject o1, IngameObject o2) {
-                return (o1.y + o1.height) - (o2.y+o2.height);
+                return (o1.y + o1.height) - (o2.y + o2.height);
             }
         });
-        
-        for(IngameObject io : sceneObjects){
+
+        for (IngameObject io : sceneObjects) {
             io.or.paintObject(io, g, this);
         }
-        if(Game.level.player != null){
+        if (Game.level.player != null) {
             g.setColor(Color.black);
             g.fillRect(Game.WIDTH - 310, Game.HEIGHT - 25, 300, 15);
             g.setColor(Color.red);
-            g.fillRect(Game.WIDTH - 308 + (100 - Game.level.player.health) * 3, Game.HEIGHT - 23, Game.level.player.health * 3 - 3, 11); 
+            g.fillRect(Game.WIDTH - 308 + (100 - Game.level.player.health) * 3, Game.HEIGHT - 23, Game.level.player.health * 3 - 3, 11);
         }
 
         //UI
         for (IngameMenu m : Game.level.menus) {
             menuRender(m, g);
         }
-        
-        
         
         /* Monitoring FPS */
         framecount++;

@@ -22,7 +22,6 @@ import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.SpeedBuff;
 
 /**
  * <p>One of the most important classes in the program, it keeps track of current logical state</p>
- * 
  */
 public class Level {
     final int HEIGHT = Game.HEIGHT, WIDTH = Game.WIDTH;  //variables changing size of the frame; used everywhere
@@ -33,10 +32,8 @@ public class Level {
     public ArrayList<Creature> creatures;
     public ArrayList<IngameMenu> menus;
     public ArrayList<Item> items;
-    int loop = 1;
     public int time = 0;
     private long gameOverTime = -1;
-    //public Timer timer;
     public boolean pause = true;
     private boolean EOF = false;
     String[] numbers = new String[6];
@@ -118,6 +115,9 @@ public class Level {
         }
     }
 
+    /**
+     * <p>The key "R" was pressed</p>
+     */
     public void rPressed() {
         if (player != null && !pause) {
             dropItem();
@@ -217,7 +217,7 @@ public class Level {
 
     /**
      * <p>Removing dead objects</p>
-     * <p>Removing taken keys, dead creatures, opened doors</p>
+     * <p>Removing taken keys, dead creatures, opened doors and dropped items from inventory</p>
      */
     public void removeDead() {
         for (int i = 0; i < items.size(); i++) {
@@ -244,9 +244,6 @@ public class Level {
         }
     }
 
-    /**
-     * <p>TBD</p>
-     */
     public void levelLogic() {
     }
 
@@ -295,6 +292,10 @@ public class Level {
         }
     }
 
+    /**
+     * <p>Checks if item is picked</p>
+     * <p>This function is called every "tick" and it changes taken property of the item, if it's picked</p>
+     */
     public void ItemPicked() {
         for (Item i : items) {
             if (i.intersects(player) && !i.taken && player.inventory.size() < 5) {
@@ -325,6 +326,11 @@ public class Level {
         }
     }
 
+    /**
+     * <p>Loading inventory from the provided path</p>
+     *
+     * @param s The path to the .txt file that contains description of the inventory
+     */
     public void loadInventory(String s) {
         String str = "";
         try {
@@ -349,6 +355,11 @@ public class Level {
         Game.new_log.writeToLog("Inventory successfully loaded", "INFO");
     }
 
+    /**
+     * <p>Saving inventory to the provided path</p>
+     *
+     * @param s The path to the .txt file that will be overwritten every time this function is called
+     */
     public void saveInventory(String s) {
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(s), "utf-8"))) {
@@ -369,32 +380,39 @@ public class Level {
         Game.new_log.writeToLog("Inventory successfully saved", "INFO");
     }
 
+    /**
+     * <p>Checks if the game is over</p>
+     * <p>This function is called every "tick" and it changes the current level to the main menu level, if the game is over</p>
+     */
     public void GameOver() {
-        if (player != null && (creatures.size() == 1||!player.alive)) {
+        if (player != null && (creatures.size() == 1 || !player.alive)) {
             if (gameOverTime == -1) {
                 gameOverTime = System.nanoTime();
-            } else if ((System.nanoTime() - gameOverTime) / 1000000000 > 3) {
+            } else if ((System.nanoTime() - gameOverTime) / 1000000000 > 3) {               //waits 3 seconds before changing the current level
                 if (creatures.get(0) instanceof Player) {
-                    saveInventory("./src/main/resources/SAVEDinventory.txt");
-                    //you win
-                    Game.new_log.writeToLog("Game is over", "INFO");
+                    Game.new_log.writeToLog("Player won", "INFO");
                 } else {
-                    saveInventory("./src/main/resources/SAVEDinventory.txt");
-                    //you lose
-                    Game.new_log.writeToLog("Game is over", "INFO");
+                    Game.new_log.writeToLog("Player lost", "INFO");
                 }
+                saveInventory("./src/main/resources/SAVEDinventory.txt");
+                Game.new_log.writeToLog("Game is over", "INFO");
                 Game.level = new MainMenuLevel();
-                //System.exit(0);
             }
         }
     }
 
+
+    /**
+     * <p>Loading level from the provided path</p>
+     *
+     * @param s The path to the .txt file that contains description of the inventory
+     */
     public void loadLevel(String s) {
         String str = "";
         try {
             Scanner sc = new Scanner(new FileInputStream(s), "UTF-8");
             while (!EOF) {
-                if(!sc.hasNextLine()){
+                if (!sc.hasNextLine()) {
                     break;
                 }
                 str = sc.nextLine();
@@ -465,5 +483,4 @@ public class Level {
         }
         Game.new_log.writeToLog("Level successfully loaded", "INFO");
     }
-
 }

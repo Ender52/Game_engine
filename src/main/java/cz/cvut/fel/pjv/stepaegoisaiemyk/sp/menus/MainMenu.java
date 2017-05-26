@@ -3,9 +3,9 @@ package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.Buttons.ExitButton;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.Buttons.LevelOneStartButton;
+
 /**
  * <p>Main menu class that represents individual buttons and the background</p>
- * 
  */
 public class MainMenu extends IngameMenu {
     /**
@@ -22,5 +22,4 @@ public class MainMenu extends IngameMenu {
         buttons.add(new ExitButton("Exit", x + 100, Game.HEIGHT - 100, 1));
         size = buttons.size();
     }
-
 }

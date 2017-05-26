@@ -31,6 +31,7 @@ public class Log {
     /**
      * <p>Providing the one and only log object</p>
      * <p>Creating log object, if none exists</p>
+     *
      * @return log object
      */
     public static Log getObject() {
@@ -58,6 +59,4 @@ public class Log {
         }
 
     }
-
-    //this.getclass().getname()
 }

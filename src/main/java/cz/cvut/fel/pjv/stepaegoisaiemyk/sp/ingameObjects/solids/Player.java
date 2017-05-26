@@ -32,14 +32,6 @@ public class Player extends Creature {
         super(x, y, width, height, speed, active, weight, health, "/sprites/player");
         inventory = new ArrayList<>(); //inventory
         name = "Player";
-        /*path = "/sprites/player";
-        try{
-            cr = new CreatureRenderer(path);
-        }catch (IOException e){
-            System.out.println("The sprites weren't loaded...");
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
         damage = 10;
     }
 
@@ -53,6 +45,7 @@ public class Player extends Creature {
     /**
      * <p>Heavy attack</p>
      * <p>This type of attack will deal 20 damage</p>
+     *
      * @param dmg
      */
     public void heavyAttack(int dmg) {
@@ -71,10 +64,8 @@ public class Player extends Creature {
         }
     }
 
-
     private void grapplingHookInit() {
         grapplingHook = new Rectangle(0, 0, 0, 0);
-        System.out.println("The hook's been initialized!");
     }
 
     /**
@@ -84,15 +75,13 @@ public class Player extends Creature {
         if (grapplingHook == null) {
             grapplingHookInit();
         }
-        System.out.println("Shooting the hook...");
     }
 
     /**
      * <p>Pulling the grappling hook</p>
-     * <p>TBD</p>
      */
     public void grapplingHookPull() {
-        System.out.println("Pulling the hook...");
+
     }
 
     /**

@@ -4,8 +4,6 @@ import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.utils.Log;
 
 public class ExitButton extends IngameButton {
 
-    private static Log new_log;
-
     /**
      * <p>The construction of the button for quiting the game</p>
      *
@@ -16,7 +14,6 @@ public class ExitButton extends IngameButton {
      */
     public ExitButton(String s, int x, int y, int pos) {
         super(s, x, y, pos);
-        //new_log = Log.getObject();
     }
 
     /**
@@ -28,6 +25,4 @@ public class ExitButton extends IngameButton {
         Log.writeToLog("Game closed", "INFO");
         System.exit(0);
     }
-
-
 }

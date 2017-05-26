@@ -7,9 +7,9 @@ import java.awt.Color;
 import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.ArrayList;
+
 /**
  * <p>A class that defines a creature on the level</p>
- * 
  */
 public class Creature extends Solid {
     public ArrayList<Rectangle> simpleAttackRanges;
@@ -30,7 +30,7 @@ public class Creature extends Solid {
      * @param active Tells if the creature will prevent another creature to go through it
      * @param weight The weight of the creature
      * @param health The health of the creature
-     * @param path
+     * @param path   The path to the images of the creature
      */
     public Creature(int x, int y, int width, int height, int speed, boolean active, int weight, int health, String path) {
         alive = true;
@@ -68,7 +68,6 @@ public class Creature extends Solid {
      * @param x The X coordinate, which tells for how much the creature will be relocated
      * @param y The Y coordinate, which tells for how much the creature will be relocated
      */
-
     public void reloc(int x, int y) {
         this.x = x;
 
@@ -93,7 +92,7 @@ public class Creature extends Solid {
         simpleAttackRanges.get(1).y = y;
         simpleAttackRanges.get(2).y = y + height;
         simpleAttackRanges.get(3).y = y;
-        
+
         checkDirection();
     }
 
@@ -123,6 +122,9 @@ public class Creature extends Solid {
     }
 
 
+    /**
+     * <p>Function that kill the creature</p>
+     */
     public void die() {
         System.out.println("The creature " + name + " is dead now.");
         alive = false;
@@ -132,6 +134,7 @@ public class Creature extends Solid {
     /**
      * <p>Simple attack</p>
      * <p>This type of attack will deal damage defined by:</p>
+     *
      * @param dmg amount of damage
      */
     public void simpleAttack(int dmg) {
@@ -147,7 +150,7 @@ public class Creature extends Solid {
             }
         }
     }
-    
+
 
     private void checkDirection() {
         animation = 0;
