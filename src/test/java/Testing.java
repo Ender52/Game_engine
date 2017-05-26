@@ -11,9 +11,9 @@ public class Testing {
 
     @Test
     public void TestGotHit() {
-        Creature c = new Creature(0, 0, 0, 0, 0, true, 0, 100, "");
-        c.gotHit(10);
-        int result = c.getHealth();
+        Player p = new Player(0, 0, 0, 0, 0, true, 0, 100);
+        p.gotHit(10);
+        int result = p.getHealth();
         assertTrue("The creature with 100 health, that got hit by 10 damage should have 90 health, not  " + result, result == 90);
     }
 

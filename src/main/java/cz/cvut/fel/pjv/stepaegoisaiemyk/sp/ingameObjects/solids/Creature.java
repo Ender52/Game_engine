@@ -55,9 +55,9 @@ public class Creature extends Solid {
         try {
             or = new CreatureRenderer(path);
         } catch (IOException ex) {
-            Logger.getLogger(Creature.class.getName()).log(Level.SEVERE, null, ex);
+            Game.new_log.writeToLog("Couldn't read creature from given path", "SEVERE");
         } catch (InterruptedException ex) {
-            Logger.getLogger(Creature.class.getName()).log(Level.SEVERE, null, ex);
+            Game.new_log.writeToLog("Thread fail", "SEVERE");
         }
     }
 

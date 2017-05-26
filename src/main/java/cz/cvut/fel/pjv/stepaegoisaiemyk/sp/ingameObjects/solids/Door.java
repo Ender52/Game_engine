@@ -1,5 +1,6 @@
 package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids;
 
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.Game;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.graphics.objectRenderers.DoorRenderer;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Obstacle;
 
@@ -23,9 +24,9 @@ public class Door extends Obstacle {
         try {
             or = new DoorRenderer(path);
         } catch (IOException ex) {
-            Logger.getLogger(Door.class.getName()).log(Level.SEVERE, null, ex);
+            Game.new_log.writeToLog("Couldn't read door from given path", "SEVERE");
         } catch (InterruptedException ex) {
-            Logger.getLogger(Door.class.getName()).log(Level.SEVERE, null, ex);
+            Game.new_log.writeToLog("Thread fail", "SEVERE");
         }
     }
 }

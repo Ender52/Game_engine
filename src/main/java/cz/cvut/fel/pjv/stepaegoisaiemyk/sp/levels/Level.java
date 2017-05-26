@@ -4,6 +4,7 @@ import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Item;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Key;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Creature;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Door;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Obstacle;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids.Player;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.physics.*;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import static cz.cvut.fel.pjv.stepaegoisaiemyk.sp.Game.new_log;
+
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.DamageBuff;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.SpeedBuff;
 
@@ -33,6 +35,8 @@ public class Level {
     private long gameOverTime = -1;
     //public Timer timer;
     public boolean pause = true;
+    private boolean EOF = false;
+    String[] numbers = new String[6];
     IngameMenu menu;
 
     /**
@@ -95,7 +99,7 @@ public class Level {
      * <p>The key "ESC" was pressed</p>
      */
     public void escPressed() {
-        if(player!=null){
+        if (player != null) {
             pause = !pause;
             pause();
         }
@@ -105,14 +109,14 @@ public class Level {
      * <p>The key "I" was pressed</p>
      */
     public void iPressed() {
-        if(player!=null){
+        if (player != null) {
             pause = !pause;
             openInventory();
         }
     }
 
     public void rPressed() {
-        if(player != null && !pause){
+        if (player != null && !pause) {
             dropItem();
         }
     }
@@ -139,7 +143,7 @@ public class Level {
      * <p>The key "F" was pressed</p>
      */
     public void fPressed() {
-        if(player!=null){
+        if (player != null) {
             player.openDoor();
         }
     }
@@ -148,7 +152,7 @@ public class Level {
      * <p>The key "E" was pressed</p>
      */
     public void ePressed() {
-        if(player!=null){
+        if (player != null) {
             player.grapplingHookShoot();
         }
     }
@@ -203,7 +207,7 @@ public class Level {
      * <p>The key "E" was released</p>
      */
     public void eReleased() {
-        if(player!=null){
+        if (player != null) {
             player.grapplingHookTerm();
         }
     }
@@ -214,23 +218,23 @@ public class Level {
      */
     public void removeDead() {
         for (int i = 0; i < items.size(); i++) {
-            if (items.get(i).taken == true) {
+            if (items.get(i).taken) {
                 items.remove(items.get(i));
             }
         }
         for (int i = 0; i < creatures.size(); i++) {
-            if (creatures.get(i).alive == false) {
+            if (!creatures.get(i).alive) {
                 creatures.remove(creatures.get(i));
             }
         }
         for (int i = 0; i < obstacles.size(); i++) {
-            if (obstacles.get(i).active == false) {
+            if (!obstacles.get(i).active) {
                 obstacles.remove(obstacles.get(i));
             }
         }
         if (Game.level.player != null) {
             for (int i = 0; i < player.inventory.size(); i++) {
-                if (player.inventory.get(i).taken == false) {
+                if (!player.inventory.get(i).taken) {
                     player.inventory.remove(player.inventory.get(i));
                 }
             }
@@ -258,7 +262,7 @@ public class Level {
 
     private void dropItem() {
         for (Item i : player.inventory) {
-            if (i.equiped == true) {
+            if (i.equiped) {
                 if (i instanceof SpeedBuff) {
                     player.speed -= 1;
                 }
@@ -287,7 +291,7 @@ public class Level {
             }
         }
     }
-    
+
     public void ItemPicked() {
         for (Item i : items) {
             if (i.intersects(player) && !i.taken && player.inventory.size() < 5) {
@@ -341,10 +345,10 @@ public class Level {
         }
         Game.new_log.writeToLog("Inventory successfully loaded", "INFO");
     }
-    
+
     public void saveInventory(String s) {
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(s), "utf-8"))){
+                new FileOutputStream(s), "utf-8"))) {
             for (Item i : player.inventory) {
                 if (i instanceof Key) {
                     writer.write("1");
@@ -361,8 +365,8 @@ public class Level {
         }
         Game.new_log.writeToLog("Inventory successfully saved", "INFO");
     }
-    
-        public void GameOver() {
+
+    public void GameOver() {
         if (player != null && creatures.size() == 1) {
             if (gameOverTime == -1) {
                 gameOverTime = System.nanoTime();
@@ -380,6 +384,80 @@ public class Level {
                 //System.exit(0);
             }
         }
+    }
+
+    public void loadLevel(String s) {
+        String str = "";
+        try {
+            Scanner sc = new Scanner(new FileInputStream(s), "UTF-8");
+            while (!EOF) {
+                str = sc.nextLine();
+                numbers = str.split(":");
+                if (numbers[0].equals("1")) {         //creatures
+                    creatures.add(new Creature(Integer.parseInt(numbers[1]), Integer.parseInt(numbers[2]), Integer.parseInt(numbers[3]), Integer.parseInt(numbers[4]), 1, true, 3, 80, "/sprites/player"));
+                    if (numbers[5].equals("9")) {
+                        EOF = true;
+                    }
+                    for (int i = 0; i < numbers.length; i++) {
+                        numbers[i] = "";
+                    }
+                    str = "";
+                }
+                if (numbers[0].equals("2")) {         //walls
+                    obstacles.add(new Obstacle(Integer.parseInt(numbers[1]), Integer.parseInt(numbers[2]), Integer.parseInt(numbers[3]), Integer.parseInt(numbers[4])));
+                    if (numbers[5].equals("9")) {
+                        EOF = true;
+                    }
+                    for (int i = 0; i < numbers.length; i++) {
+                        numbers[i] = "";
+                    }
+                    str = "";
+                }
+                if (numbers[0].equals("3")) {         //doors
+                    obstacles.add(new Door(Integer.parseInt(numbers[1]), Integer.parseInt(numbers[2]), Integer.parseInt(numbers[3]), Integer.parseInt(numbers[4])));
+                    if (numbers[5].equals("9")) {
+                        EOF = true;
+                    }
+                    for (int i = 0; i < numbers.length; i++) {
+                        numbers[i] = "";
+                    }
+                    str = "";
+                }
+                if (numbers[0].equals("4")) {         //keys
+                    items.add(new Key(Integer.parseInt(numbers[1]), Integer.parseInt(numbers[2]), Integer.parseInt(numbers[3]), Integer.parseInt(numbers[4]), false, false));
+                    if (numbers[5].equals("9")) {
+                        EOF = true;
+                    }
+                    for (int i = 0; i < numbers.length; i++) {
+                        numbers[i] = "";
+                    }
+                    str = "";
+                }
+                if (numbers[0].equals("5")) {         //damagebuffs
+                    items.add(new DamageBuff(Integer.parseInt(numbers[1]), Integer.parseInt(numbers[2]), Integer.parseInt(numbers[3]), Integer.parseInt(numbers[4]), false, false));
+                    if (numbers[5].equals("9")) {
+                        EOF = true;
+                    }
+                    for (int i = 0; i < numbers.length; i++) {
+                        numbers[i] = "";
+                    }
+                    str = "";
+                }
+                if (numbers[0].equals("6")) {         //speedbuffs
+                    items.add(new SpeedBuff(Integer.parseInt(numbers[1]), Integer.parseInt(numbers[2]), Integer.parseInt(numbers[3]), Integer.parseInt(numbers[4]), false, false));
+                    if (numbers[5].equals("9")) {
+                        EOF = true;
+                    }
+                    for (int i = 0; i < numbers.length; i++) {
+                        numbers[i] = "";
+                    }
+                    str = "";
+                }
+            }
+        } catch (IOException e) {
+            Game.new_log.writeToLog("Couldn't load level", "SEVERE");
+        }
+        Game.new_log.writeToLog("Level successfully loaded", "INFO");
     }
 
 }

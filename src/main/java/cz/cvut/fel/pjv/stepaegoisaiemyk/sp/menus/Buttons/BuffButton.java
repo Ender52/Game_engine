@@ -26,7 +26,7 @@ public class BuffButton extends ItemButton {
     @Override
     public void selectAction() {
         for (Item i : Game.level.player.inventory){
-            if (i.equiped == true){
+            if (i.equiped){
                 i.equiped = false;
                 Game.new_log.writeToLog(i.name + " is unequiped", "INFO");
             }

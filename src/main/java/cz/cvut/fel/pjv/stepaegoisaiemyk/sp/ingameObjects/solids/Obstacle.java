@@ -1,5 +1,6 @@
 package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids;
 
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.Game;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.graphics.objectRenderers.ObstacleRenderer;
 import java.awt.Color;
 import java.io.IOException;
@@ -27,9 +28,9 @@ public class Obstacle extends Solid {
         try {
             or = new ObstacleRenderer(path);
         } catch (IOException ex) {
-            Logger.getLogger(Obstacle.class.getName()).log(Level.SEVERE, null, ex);
+            Game.new_log.writeToLog("Couldn't read obstacle from given path", "SEVERE");
         } catch (InterruptedException ex) {
-            Logger.getLogger(Obstacle.class.getName()).log(Level.SEVERE, null, ex);
+            Game.new_log.writeToLog("Thread fail", "SEVERE");
         }
     }
 }

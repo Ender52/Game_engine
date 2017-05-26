@@ -22,7 +22,7 @@ public class ImageLoader extends Thread{
         try {
             image = ImageIO.read(getClass().getResourceAsStream(path));
         } catch (IOException ex) {
-            Logger.getLogger(ImageLoader.class.getName()).log(Level.SEVERE, null, ex);
+            Game.new_log.writeToLog("Couldn't read image from given path", "SEVERE");
         }
     }
 }

@@ -19,5 +19,4 @@ public class PauseMenu extends IngameMenu {
         buttons.add(new ExitButton("Exit", x + 15, Game.HEIGHT - 2 * y + 30, 1));
         size = buttons.size();
     }
-
 }

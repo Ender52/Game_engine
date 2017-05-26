@@ -7,8 +7,6 @@ import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.Buttons.KeyButton;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.Buttons.ResumeButton;
 
 public class InventoryMenu extends IngameMenu {
-    private int offset = 10;
-
     /**
      * <p>The construction of the inventory menu</p>
      *

@@ -25,7 +25,7 @@ public class KeyButton extends ItemButton {
     @Override
     public void selectAction() {
         for(Item i : Game.level.player.inventory){
-            if (i.equiped == true){
+            if (i.equiped){
             i.equiped = false;
             Game.new_log.writeToLog(i.name + " is uneqiped", "INFO");
             }
@@ -33,5 +33,4 @@ public class KeyButton extends ItemButton {
         Game.level.player.inventory.get(positionInList).equiped = true;
         Game.new_log.writeToLog(Game.level.player.inventory.get(positionInList).name + " is equiped", "INFO");
     }
-
 }
