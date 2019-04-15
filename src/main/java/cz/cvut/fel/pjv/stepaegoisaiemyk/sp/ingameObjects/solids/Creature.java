@@ -2,11 +2,13 @@ package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.solids;
 
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.Game;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.graphics.objectRenderers.CreatureRenderer;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.ingameObjects.items.Key;
 
 import java.awt.Color;
 import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * <p>A class that defines a creature on the level</p>
@@ -129,6 +131,11 @@ public class Creature extends Solid {
         System.out.println("The creature " + name + " is dead now.");
         alive = false;
         Game.new_log.writeToLog("Creature " + name + " died", "INFO");
+        Random rand = new Random();
+        int r = rand.nextInt(100);
+        if (0 < r || r > 100) {
+            Game.level.items.add(new Key(x,y,64,64,false,false));
+        }
     }
 
     /**

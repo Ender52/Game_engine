@@ -2,6 +2,7 @@ package cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus;
 
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.*;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.Buttons.ExitButton;
+import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.Buttons.InfoButton;
 import cz.cvut.fel.pjv.stepaegoisaiemyk.sp.menus.Buttons.LevelOneStartButton;
 
 public class PauseMenu extends IngameMenu {
